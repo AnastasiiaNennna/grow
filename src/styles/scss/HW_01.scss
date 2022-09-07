@@ -1,0 +1,62 @@
+@import "_variables.scss";
+
+.content {
+    &-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        width: 800px;
+        margin: 20px 0;
+    }
+}
+
+.table {
+    &-wrapper {
+        width: 400px;
+        border: 2px solid $secondary-color;
+        border-spacing: 0;
+
+        thead {
+            th {
+                width: 25%;
+                text-align: center;
+                border-bottom: 0.5px solid $secondary-color;
+                &:first-child {
+                    width: 50%;
+                }
+            }
+        }
+
+        tbody {
+            td {
+                border-bottom: 1px solid grey;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+    }
+}
+
+h2 {
+    text-align: center;
+}
+
+.buttons {
+    &-tag {
+        button {
+            margin: 20px;
+        }
+    }
+}
+
+.tag {
+    &-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        border: 2px solid #000;
+        padding: 5px;
+        align-items: center;
+        margin: 0 auto;
+        background-color: #fff;
+    }
+}
