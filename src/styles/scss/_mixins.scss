@@ -1,0 +1,228 @@
+@mixin flex-line($width) {
+    width: $width;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+@mixin like($bg) {
+    width: 24px;
+    height: 24px;
+    content: "";
+    display: block;
+    position: absolute;
+    background: $bg no-repeat 100%;
+    top: -5px;
+    left: -35px;
+}
+
+@mixin border-bottom($size, $color) {
+    border-bottom: $size solid $color;
+}
+
+@mixin border-left($size, $color) {
+    border-left: $size solid $color;
+}
+
+@mixin border-right($size, $color) {
+    border-right: $size solid $color;
+}
+
+@mixin border-top($size, $color) {
+    border-top: $size solid $color;
+}
+
+@mixin border-full($size, $color) {
+    border-bottom: $size solid $color;
+}
+
+@mixin cross-out-line {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 133px;
+    border: 1px solid $primary-color;
+    top: 14px;
+    right: 0px;
+}
+
+@mixin link-underline {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 57px;
+    border: 1px solid $primary-color;
+    top: 23px;
+    right: 0px;
+}
+
+@mixin blog-review-circle {
+    position: absolute;
+    content: "";
+    display: block;
+    height: 16px;
+    width: 16px;
+    border: 2px solid $border-color;
+    background-color: $thirdly-color;
+    border-radius: 50%;
+    z-index: 2;
+    top: -11px;
+    left: -10px;
+}
+
+@mixin post-author($img) {
+    @extend %pseudo_elem;
+    position: absolute;
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+    background: $img no-repeat 100%;
+    background-size: cover;
+    margin: 1px 0 0 -1px;
+}
+
+@mixin rating {
+    display: inline-block;
+    margin: 2px 0 0 6px;
+    &_star {
+        height: 14px;
+        width: 14px;
+        display: inline-block;
+    }
+}
+
+@mixin quote_line {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: -31px;
+    height: 120px;
+    width: 5px;
+    background-color: $line-color;
+}
+
+@mixin socials($first, $second, $third) {
+    height: 23px;
+    width: 23px;
+    display: block;
+    &:nth-child(1) {
+        background: $first no-repeat 100%;
+        width: 14px;
+    }
+    &:nth-child(2) {
+        background: $second no-repeat 100%;
+    }
+    &:last-child {
+        background: $third no-repeat 100%;
+    }
+}
+
+@mixin block($height, $width) {
+    height: $height;
+    width: $width;
+    border-radius: 5px;
+    background-color: $blog-bg-color;
+    position: relative;
+}
+
+@mixin review_author_img($img) {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    background: $img no-repeat 100%;
+    background-size: cover;
+    top: 1px;
+    left: -95px;
+}
+
+@mixin review_time {
+    color: $info-font-color;
+    @extend %small_text;
+    font-weight: 300;
+    margin-top: 2px;
+    position: relative;
+    &::before {
+        content: "";
+        height: 14px;
+        width: 14px;
+        display: block;
+        position: absolute;
+        background: url(../../assets/img/a-icon-time.svg) no-repeat 100%;
+        background-size: cover;
+        top: 5px;
+        left: -24px;
+    }
+}
+
+@mixin blog-sidebar-img($img) {
+    height: 150px;
+    width: 160px;
+    background: $img no-repeat 100%;
+    background-size: cover;
+}
+
+@mixin blog-categories-arrow {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    right: -2px;
+    height: 11px;
+    width: 18px;
+    display: block;
+    background: url(../../assets/img/a-icon-arrow.svg) no-repeat 100%;
+    background-size: cover;
+}
+
+@mixin play-video-btn {
+    background: url(../../assets/img/a-icon-play.svg) no-repeat 100%;
+    background-size: contain;
+    height: 72px;
+    width: 72px;
+    position: absolute;
+    top: 153px;
+    left: 245px;
+}
+
+@mixin blog-post($bg-img, $author-img, $icon) {
+    position: relative;
+    box-shadow: 0px 51px 16px -52px $shadow-color-second;
+    .main__blog_item_img {
+        background: $bg-img no-repeat 100%;
+        background-size: cover;
+    }
+    .main__blog_item_post_author_wrap::before {
+        background: $author-img no-repeat 100%;
+        background-size: cover;
+    }
+    &::after {
+        @extend %blog_pseudo_el;
+        background: $icon no-repeat 50%;
+    }
+}
+
+@mixin title-underline($width) {
+    @include border-bottom(1px, #000);
+    width: $width;
+    position: relative;
+    &::before {
+        position: absolute;
+        content: "";
+        width: 3px;
+        height: 8px;
+        @include border-top(1px, #000);
+        @include border-left(1px, #000);
+        bottom: -1px;
+        right: -2px;
+    }
+    &::after {
+        position: absolute;
+        content: "";
+        width: 3px;
+        height: 8px;
+        @include border-top(1px, #000);
+        @include border-right(1px, #000);
+        bottom: -1px;
+        left: -2px;
+    }
+}

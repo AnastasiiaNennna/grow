@@ -1,0 +1,26 @@
+footer {
+    grid-area: footer;
+    grid-column: 2 / 3;
+    border-top: 2px solid $border-color;
+    background-color: #f8f8f8;
+}
+
+.footer {
+    width: 1440px;
+    height: 71px;
+    position: fixed;
+    bottom: 0;
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 21px;
+    padding: 23px 140px;
+    background-color: #f8f8f8;
+    &__logo {
+        margin: -2px 0 0 54px;
+    }
+    &__copyrights {
+        color: #333333;
+        @extend %small_text
+    }
+}

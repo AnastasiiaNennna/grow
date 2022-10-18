@@ -1,0 +1,92 @@
+@import "_mixins.scss";
+
+.header {
+    grid-area: header;
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template: repeat(2, minmax(55px, auto)) / 1fr minmax(auto, 1160px) 1fr;
+    background: url(../../assets/img/bg-header.jpg) no-repeat 100%;
+    background-size: cover;
+    &__navbar {
+        display: grid;
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        grid-template: 55px / minmax(100px, auto) repeat(12, 60px) minmax(100px,auto);
+        grid-column-gap: 40px;
+        z-index: 999;
+        position: fixed;
+        background: url(../../assets/img/bg-header.jpg) no-repeat top;
+        background-size: cover;
+    }
+    &__logo {
+        grid-column: 2 / 3;
+        padding-top: 25px;
+    }
+    &__menu {
+        grid-column: 9 / 14;
+        @extend %header_nav_menu;
+    }
+    &__item {
+        width: 75px;
+        text-align: center;
+        &:first-child {
+            padding-left: 5px;
+            text-align: left;
+        }
+        &:last-child {
+            padding-left: 5px;
+            text-align: right;
+        }
+        &:nth-child(2) {
+            margin-left: -2px;
+        }
+        &:nth-child(3),
+        &:nth-child(5) {
+            padding-left: 6px;
+            margin-left: 2px;
+        }
+        &:hover {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        a:active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        &:nth-child(3) a {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    }
+    &__wrap {
+        display: grid;
+        grid-column: 2 / 3;
+        grid-template: 55px 190px 200px 1fr / repeat(12, 60px);
+        grid-column-gap: 40px;
+    }
+    &__title {
+        grid-row: 2 / 3;
+        grid-column: 1 / 13;
+        width: 416px;
+        padding-top: 99px;
+        @extend %title_h1;
+    }
+    &__text {
+        grid-row: 3 / 4;
+        grid-column: 1 / 13;
+        height: 78px;
+        width: 660px;
+        margin-top: 4px;
+        @extend %regular_text;
+    }
+    &__button-explore {
+        grid-row: 4 / 5;
+        grid-column: 1 / 2;
+        margin-top: -95px;
+    }
+    &__button-more {
+        grid-row: 4 / 5;
+        grid-column: 2 / 3;
+        margin: -95px 25px;
+    }
+}

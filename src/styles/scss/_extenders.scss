@@ -1,0 +1,130 @@
+%header_nav_menu {
+    display: flex;
+    justify-content: space-between;
+    color: $secondary-color;
+    font-size: 15px;
+    line-height: 25px;
+    padding-top: 28px;
+}
+
+%logo {
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+%title_h1 {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 37px;
+}
+
+%regular_text {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 26px;
+}
+
+%regular_title_text {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 39px;
+}
+
+%secondary_text {
+    font-size: 17px;
+    line-height: 28px;
+    font-weight: 500;
+}
+
+%thirdly_text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 32px;
+}
+
+%small_text {
+    font-size: 15px;
+    line-height: 25px;
+}
+
+%primary_btn {
+    height: 45px;
+    border-radius: 5px;
+    background-color: $primary-color;
+    color: $thirdly-color;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+%secondary_btn {
+    box-sizing: border-box;
+    height: 45px;
+    width: 125px;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 25px;
+    background: transparent;
+}
+
+%hovered_btn {
+    background-color: #393737;
+    color: #fff;
+    cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
+}
+
+%main_title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 39px;
+    padding-bottom: 10px;
+    margin: 80px auto 0 auto;
+}
+
+%comment_icon {
+    content: "";
+    display: inline-block;
+    background: url(../../assets/img/a-icon-comment.svg) no-repeat 100%;
+    background-size: contain;
+    height: 13px;
+    width: 14px;
+    margin: 0 5px 0 -1px;
+}
+
+%dot_separator {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #818181;
+    margin: 0 7px 4px 11px;
+}
+
+%pseudo_elem {
+    content: "";
+    display: block;
+    border-radius: 5px;
+}
+
+%input {
+    box-sizing: border-box;
+    height: 45px;
+    width: 320px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+}
+
+%blog_pseudo_el {
+    content: "";
+    position: absolute;
+    height: 76px;
+    width: 84px;
+    border: 3px solid #ffffff;
+    border-radius: 5px;
+    background-color: #fcf6f6;
+    top: -2px;
+    right: -3px;
+}
