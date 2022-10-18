@@ -53,19 +53,27 @@ ladder.up().up().down().up().showStep();
 
 //3.ES6 
 const applyAll = (func, ...args) => {
-    return [].reduce.call(args, func);
+    return func(...args);
 };
-const sum = (arg1, arg2) => {
-    return arg1 + arg2;
+const sum = (...args) => {
+    const arr = [...args];
+    return arr.reduce((prev, next) => prev + next, 0)
 };
-const mul = (arg1, arg2) => {
-    return arg1 * arg2;
+const mul = (...args) => {
+    const arr = [...args];
+    return arr.reduce((prev, next) => prev * next, 1)
 };
-const div = (arg1, arg2) => {
-    return arg1 / arg2;
+const div = (...args) => {
+    const arr = [...args];
+    const initialValue = arr[0];
+    arr.shift();
+    return arr.reduce((prev, next) => prev / next, initialValue)
 };
-const dif = (arg1, arg2) => {
-    return arg1 - arg2;
+const dif = (...args) => {
+    const arr = [...args];
+    const initialValue = arr[0];
+    arr.shift();
+    return arr.reduce((prev, next) => prev - next, initialValue)
 };
 
 console.log(applyAll(sum, 1, 2, 3)); // 6
