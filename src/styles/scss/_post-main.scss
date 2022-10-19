@@ -187,7 +187,8 @@
                             width: 70px;
                             border: 1px solid $primary-color;
                             top: 19px;
-                            right: 1px;
+                            right: 0px;
+                            background-color: $primary-color;
                         }
                     }
                     &:nth-child(2) {
@@ -252,7 +253,7 @@
                     display: flex;
                     &_img {
                         @include blog-sidebar-img(
-                            url(.../../assets/img/latest-post-img-1.png)
+                            url(../../assets/img/latest-post-img-1.png)
                         );
                     }
                     &:last-child {
@@ -378,7 +379,7 @@
                         @extend %hovered_btn;
                         height: auto;
                         width: auto;
-                        margin: 15px 16px 0 0;
+                        margin: 15px 12px 0 0;
                         padding: 4px 14px;
                     }
                 }

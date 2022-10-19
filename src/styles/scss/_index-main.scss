@@ -1,13 +1,5 @@
 @import "_mixins.scss";
 
-.logo {
-  font-size: 17px;
-  font-weight: bold;
-  line-height: 28px;
-}
-a {
-  cursor: url(../../assets/img/hand-cursor-white-h.svg), pointer;
-}
 .button {
   font-size: 15px;
   line-height: 25px;
@@ -51,7 +43,7 @@ a {
     grid-column: 4 / 13;
     height: 592px;
     width: 860px;
-    background: url(.../../assets/img/about_picture.png) no-repeat 100%;
+    background: url(../../assets/img/about_picture.png) no-repeat 100%;
     background-size: cover;
     position: relative;
 	&-button {
@@ -586,32 +578,7 @@ a {
         background-size: cover;
 	}
 }
-.socials {
-	&__wrap {
-        width: 120px;
-        width: 112px;
-        display: inline-flex;
-        justify-content: space-between;
-	}
-	&__item {
-        height: 23px;
-        width: 23px;
-        display: block;
-        &:first-child {
-            background: url(../../assets/img/a-icon-facebook.svg) no-repeat 100%;
-            background-size: cover;
-            width: 14px;
-        }
-        &:nth-child(2) {
-            background: url(../../assets/img/a-icon-instagram.svg) no-repeat 100%;
-            background-size: cover;
-        }
-        &:last-child {
-            background: url(../../assets/img/a-icon-dribbble.svg) no-repeat 100%;
-            background-size: cover;
-        }
-	}
-}
+
 .form {
 	&__fields {
         grid-column: 1 / 2;
@@ -625,6 +592,7 @@ a {
 	&__input {
         @extend %input;
         margin: 5px 0 32px 0;
+        padding-left: 15px;
 	}
 	&__show-password {
         position: absolute;

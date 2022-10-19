@@ -39,10 +39,11 @@
     content: "";
     position: absolute;
     height: 2px;
-    width: 133px;
+    width: 132px;
     border: 1px solid $primary-color;
     top: 14px;
-    right: 0px;
+    right: 5px;
+    background-color: $primary-color;
 }
 
 @mixin link-underline {

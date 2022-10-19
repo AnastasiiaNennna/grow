@@ -179,6 +179,7 @@
             width: 121px;
             margin: 60px auto;
             display: block;
+            border: none;
             &:hover {
                 @extend %hovered_btn;
             }

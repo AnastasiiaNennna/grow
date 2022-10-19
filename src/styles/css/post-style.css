@@ -86,7 +86,7 @@ select {
   src: url("../../assets/fonts/HindSiliguri-Light.ttf") format("truetype");
   font-weight: 300;
 }
-.header__navbar .header__nav_menu {
+.header__menu {
   display: flex;
   justify-content: space-between;
   color: #504545;
@@ -95,7 +95,7 @@ select {
   padding-top: 28px;
 }
 
-.header__navbar .header__logo {
+.header__logo {
   font-size: 17px;
   font-weight: bold;
   line-height: 28px;
@@ -315,10 +315,11 @@ select {
   content: "";
   position: absolute;
   height: 2px;
-  width: 133px;
+  width: 132px;
   border: 1px solid #4d4c49;
   top: 14px;
-  right: 0px;
+  right: 5px;
+  background-color: #4d4c49;
 }
 .main__post .link {
   position: relative;
@@ -447,7 +448,8 @@ select {
   width: 70px;
   border: 1px solid #4d4c49;
   top: 19px;
-  right: 1px;
+  right: 0px;
+  background-color: #4d4c49;
 }
 .main__post_reviews_wrap_item:nth-child(2) {
   margin-top: 70px;
@@ -519,7 +521,7 @@ select {
 .main__sidebar_posts_wrap_item_img {
   height: 150px;
   width: 160px;
-  background: url(.../../assets/img/latest-post-img-1.png) no-repeat 100%;
+  background: url(../../assets/img/latest-post-img-1.png) no-repeat 100%;
   background-size: cover;
 }
 .main__sidebar_posts_wrap_item:last-child .main__sidebar_posts_wrap_item_img {
@@ -638,7 +640,7 @@ select {
 .main__sidebar_tags_wrap_btn:hover {
   height: auto;
   width: auto;
-  margin: 15px 16px 0 0;
+  margin: 15px 12px 0 0;
   padding: 4px 14px;
 }
 
@@ -668,16 +670,6 @@ footer {
   color: #333333;
 }
 
-body {
-  max-width: 100vw;
-  min-height: 100%;
-  display: grid;
-  grid-template: 80px 3114px 71px/1fr minmax(auto, 1440px) 1fr;
-  grid-template-areas: "header" "main" "footer";
-  font-family: "Hind Siliguri";
-  color: #4d4c49;
-}
-
 .header {
   grid-area: header;
   grid-column: 2/3;
@@ -692,47 +684,95 @@ body {
   grid-column-gap: 40px;
   z-index: 999;
   position: fixed;
-  background: #fff;
 }
-.header__navbar .header__logo {
+.header__logo {
   grid-column: 2/3;
   padding-top: 25px;
 }
-.header__navbar .header__nav_menu {
+.header__menu {
   grid-column: 9/14;
 }
-.header__navbar .header__nav_menu_item {
+.header__item {
   width: 75px;
   text-align: center;
 }
-.header__navbar .header__nav_menu_item:first-child {
+.header__item:first-child {
   padding-left: 5px;
   text-align: left;
 }
-.header__navbar .header__nav_menu_item:last-child {
+.header__item:last-child {
   padding-left: 5px;
   text-align: right;
 }
-.header__navbar .header__nav_menu_item:nth-child(2) {
+.header__item:nth-child(2) {
   margin-left: -2px;
 }
-.header__navbar .header__nav_menu_item:nth-child(3), .header__navbar .header__nav_menu_item:nth-child(5) {
+.header__item:nth-child(3), .header__item:nth-child(5) {
   padding-left: 6px;
   margin-left: 2px;
 }
-.header__navbar .header__nav_menu_item:hover {
+.header__item:hover {
   font-weight: 600;
   text-decoration: underline;
 }
-.header__navbar .header__nav_menu_item a:active {
+.header__item a:active {
   font-weight: 600;
   text-decoration: underline;
 }
-.header__navbar .header__nav_menu_item:nth-child(3) a {
+.header__item:nth-child(3) a {
   font-weight: 600;
   text-decoration: underline;
 }
 
 footer {
   border-top: none;
+}
+
+.socials__wrap {
+  width: 120px;
+  width: 112px;
+  display: inline-flex;
+  justify-content: space-between;
+}
+.socials__item {
+  height: 23px;
+  width: 23px;
+  display: block;
+}
+.socials__item:first-child {
+  background: url(../../assets/img/a-icon-facebook.svg) no-repeat 100%;
+  background-size: cover;
+  width: 14px;
+}
+.socials__item:nth-child(2) {
+  background: url(../../assets/img/a-icon-instagram.svg) no-repeat 100%;
+  background-size: cover;
+}
+.socials__item:last-child {
+  background: url(../../assets/img/a-icon-dribbble.svg) no-repeat 100%;
+  background-size: cover;
+}
+
+.logo {
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 28px;
+}
+
+a {
+  cursor: url(../../assets/img/hand-cursor-white-h.svg), pointer;
+}
+
+body {
+  max-width: 100vw;
+  min-height: 100%;
+  display: grid;
+  grid-template: 80px 3114px 71px/1fr minmax(auto, 1440px) 1fr;
+  grid-template-areas: "header" "main" "footer";
+  font-family: "Hind Siliguri";
+  color: #4d4c49;
+}
+
+.header__navbar {
+  background: #fff;
 }
