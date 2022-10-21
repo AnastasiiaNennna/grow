@@ -188,11 +188,11 @@
 @mixin blog-post($bg-img, $author-img, $icon) {
     position: relative;
     box-shadow: 0px 51px 16px -52px $shadow-color-second;
-    .main__blog_item_img {
+    .item__img {
         background: $bg-img no-repeat 100%;
         background-size: cover;
     }
-    .main__blog_item_post_author_wrap::before {
+    .post__header::before {
         background: $author-img no-repeat 100%;
         background-size: cover;
     }

@@ -4,386 +4,441 @@
     grid-area: main;
     display: grid;
     grid-column: 2 / 3;
-    grid-template-columns: minmax(auto, 100px) repeat(12, 60px) minmax(
-            auto,
-            100px
-        );
+    grid-template-columns: minmax(auto, 100px) repeat(12, 60px) minmax(auto, 100px);
     grid-auto-rows: minmax(50px, auto);
     grid-column-gap: 40px;
     grid-row-gap: 40px;
-    &__post {
+	&__post {
         grid-column: 2 / 9;
         margin-top: 45px;
-        &_title {
-            @extend %title_h1;
-        }
-        &_author_wrap {
-            margin-bottom: 20px;
-            &_title {
-                @extend %secondary_text;
-                margin: 24px 0 0 67px;
-            }
-            &_info {
-                color: $info-font-color;
-                @extend %small_text;
-                line-height: 25px;
-                margin: -1px 0 0 67px;
-                &_time,
-                &_comments {
-                    margin-left: -1px;
-                }
-                &_comments::before {
-                    @extend %comment_icon;
-                }
-                &_data::after,
-                &_time::after {
-                    @extend %dot_separator;
-                }
-                &_rating {
-                    @include rating;
-                }
-            }
-            &::before {
-                @include post-author(url(../../assets/img/Sarah.png));
-            }
-        }
-        &_img {
-            height: 447px;
-            width: 661px;
-            background: url(../../assets/img/post_main_img.png) no-repeat 100%;
-            background-size: cover;
-        }
-        &_audio {
-            margin-top: 14px;
-        }
-        &_article {
-            @extend %regular_text;
-            margin: 9px 0 20px 0;
-            &_title {
-                margin: 34px 0 10px 0;
-                @extend %regular_title_text;
-            }
-        }
-        .quote {
-            margin: 28px 0 43px 31px;
-            width: 500px;
-            font-weight: 300;
-            line-height: 26px;
-            position: relative;
-            &::before {
-                @include quote_line;
-            }
-        }
-        &_social {
-            @include flex-line(100%);
-            @include border-bottom(1px, $border-color);
-            margin-top: 31px;
-            &_likes {
-                @extend %small_text;
-                position: relative;
-                margin: 4px 0 9px 35px;
-                &::before {
-                    @include like(url(../../assets/img/a-icon-like-1.svg));
-                }
-                &:hover {
-                    cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
-                    &::before {
-                        @include like(url(../../assets/img/a-icon-like-hover.svg));
-                    }
-                }
-            }
-            &_link {
-                @include flex-line(120px);
-                &_item {
-                    @include socials(
-                        url(../../assets/img/a-icon-facebook.svg),
-                        url(../../assets/img/a-icon-dribbble.svg),
-                        url(../../assets/img/a-icon-instagram.svg)
-                    );
-                }
-            }
-        }
-        .strong {
-            font-weight: bold;
-        }
-        .crossed_out {
-            margin-left: -1px;
-            font-weight: 500;
-            position: relative;
-            &::after {
-                @include cross-out-line;
-            }
-        }
-        .link {
-            position: relative;
-            font-weight: bold;
-            &:hover {
-                cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
-                &::after {
-                    @include link-underline;
-                }
-            }
-        }
-        &_reviews {
-            margin-top: 36px;
-            &_title {
-                @extend %regular_title_text;
-            }
-            &_wrap {
-                @include border-left(2px, $border-color);
-                width: 610px;
-                height: 830px;
-                margin: 28px 0 0 40px;
-                padding: 33px 0 0 53px;
-                position: relative;
-                &::before {
-                    @include blog-review-circle;
-                }
-                &::after {
-                    @include blog-review-circle;
-                }
-                &_item {
-                    @include block(169px, 551px);
-                    &::before {
-                        @include review_author_img(url(../../assets/img/Neil_big.png));
-                    }
-                    &_title {
-                        width: 541px;
-                        display: inline-flex;
-                        justify-content: space-between;
-                        padding: 12px 9px 0 21px;
-                        &_author {
-                            display: inline-flex;
-                            &_name {
-                                @extend %secondary_text;
-                            }
-                            &_rating {
-                                @include rating;
-                                margin-left: 11px;
-                                &_star:last-child {
-                                    margin-left: -2px;
-                                }
-                            }
-                        }
-                        &_time {
-                            @include review_time;
-                        }
-                    }
-                    &_text {
-                        @extend %small_text;
-                        padding: 9px 19px 9px 21px;
-                    }
-                    &_read {
-                        @extend %small_text;
-                        font-weight: 500;
-                        display: block;
-                        text-align: right;
-                        margin: 3px 19px 0 0;
-                        position: relative;
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            height: 1px;
-                            width: 70px;
-                            border: 1px solid $primary-color;
-                            top: 19px;
-                            right: 0px;
-                            background-color: $primary-color;
-                        }
-                    }
-                    &:nth-child(2) {
-                        margin-top: 70px;
-                        height: 319px;
-                        .main__post_reviews_wrap_item_read {
-                            margin-right: 20px;
-                            &::after {
-                                width: 60px;
-                            }
-                        }
-                        &::before {
-                            @include review_author_img(
-                                url(../../assets/img/Sarah_big.png)
-                            );
-                        }
-                    }
-                    &:nth-child(3) {
-                        margin-top: 70px;
-                        height: 133px;
-                        &::before {
-                            @include review_author_img(url(../../assets/img/Ann_big.png));
-                        }
-                    }
-                }
-            }
-            &_btn {
-                @extend %secondary_btn;
-                width: 158px;
-                margin: 71px 0 0 292px;
-                &:hover {
-                    @extend %hovered_btn;
-                    width: 158px;
-                }
-            }
-        }
-    }
-    &__sidebar {
+	}
+	&__sidebar {
         grid-column: 9 / 14;
         padding-top: 216px;
         display: grid;
-        grid-template:
-            minmax(auto, 539px) minmax(auto, 469px)
-            minmax(auto, 269px) / minmax(460px, auto);
+        grid-template:minmax(auto, 539px) minmax(auto, 469px) minmax(auto, 269px) / minmax(460px, auto);
         grid-auto-flow: column;
         grid-row-gap: 70px;
-        &_posts {
-            border-radius: 5px;
-            background-color: $blog-bg-color;
-            padding: 30px;
-            &_title {
-                @extend %regular_title_text;
+	}
+}
+.post {
+	&__title {
+        @extend %title_h1;
+	}
+	&__header {
+        margin-bottom: 20px;
+        position: relative;
+	}
+	&__header-title {
+        @extend %secondary_text;
+        margin: 24px 0 0 67px;
+	}
+	&__header-info {
+        color: $info-font-color;
+        @extend %small_text;
+        line-height: 25px;
+        margin: -1px 0 0 67px;
+        &::before {
+            @include post-author(url(../../assets/img/Sarah.png));
+            top: 0;
+            left: 0;
+        }
+	}
+	&__img {
+        height: 447px;
+        width: 661px;
+        background: url(../../assets/img/post_main_img.png) no-repeat 100%;
+        background-size: cover;
+	}
+	&__audio {
+        margin-top: 14px;
+	}
+	&__article {
+        @extend %regular_text;
+        margin: 9px 0 20px 0;
+	}
+	&__article-title {
+        margin: 34px 0 10px 0;
+        @extend %regular_title_text;
+	}
+	&__socials {
+        @include flex-line(100%);
+        @include border-bottom(1px, $border-color);
+        margin-top: 31px;
+        .socials__likes {
+            @extend %small_text;
+            position: relative;
+            margin: 4px 0 9px 35px;
+            &::before {
+                @include like(url(../../assets/img/a-icon-like-1.svg));
             }
-            &_wrap {
-                @include border-top(1px, $line-color);
-                width: 400px;
-                height: 391px;
-                margin-top: 4px;
-                &_item {
-                    height: 150px;
-                    margin-top: 30px;
-                    display: flex;
-                    &_img {
-                        @include blog-sidebar-img(
-                            url(../../assets/img/latest-post-img-1.png)
-                        );
-                    }
-                    &:last-child {
-                        .main__sidebar_posts_wrap_item_img {
-                            @include blog-sidebar-img(
-                                url(../../assets/img/latest-post-img-2.png)
-                            );
-                        }
-                    }
-                    &_post {
-                        padding: 33px 0 0 15px;
-                        &_title {
-                            width: 225px;
-                            @extend %secondary_text;
-                            line-height: 23px;
-                        }
-                        &_info {
-                            color: #818181;
-                            @extend %small_text;
-                            line-height: 25px;
-                            margin-top: 20px;
-                            &_comments::before {
-                                @extend %comment_icon;
-                            }
-                            &_data::after,
-                            &_time::after {
-                                @extend %dot_separator;
-                            }
-                        }
-                    }
+            &:hover {
+            cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
+                &::before {
+                    @include like(url(../../assets/img/a-icon-like-hover.svg));
                 }
             }
-            &_btn {
-                @extend %secondary_btn;
-                margin-left: 275px;
-                &:hover {
-                    @extend %hovered_btn;
-                }
+	    }
+	    .socials__wrap {
+            @include flex-line(120px);
+	    }
+	    .socials__item {
+            @include socials(
+                url(../../assets/img/a-icon-facebook.svg),
+                url(../../assets/img/a-icon-dribbble.svg),
+                url(../../assets/img/a-icon-instagram.svg)
+            );
+	    }
+	}
+	&__reviews-wrapper {
+        margin-top: 36px;
+	}
+}
+.info {
+	&__data {
+        &::after {
+            @extend %dot_separator;
+        }
+	}
+	&__time {
+        margin-left: -1px;
+        &::after {
+            @extend %dot_separator;
+        }
+	}
+	&__comments {
+        margin-left: -1px;
+        &::before {
+            @extend %comment_icon;
+        }
+	}
+	&__rating {
+        @include rating;
+	}
+}
+.strong {
+    font-weight: bold;
+}
+.crossed-out {
+    margin-left: -1px;
+    font-weight: 500;
+    position: relative;
+    &::after {
+        @include cross-out-line;
+    }
+}
+.quote {
+    margin: 28px 0 43px 31px;
+    width: 500px;
+    font-weight: 300;
+    line-height: 26px;
+    position: relative;
+    &::before {
+        @include quote_line;
+    }
+}
+.link {
+    position: relative;
+    font-weight: bold;
+    &:hover {
+        cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
+        &::after {
+            @include link-underline;
+        }
+    }
+}
+.socials {
+	&__likes {
+        @extend %small_text;
+        position: relative;
+        margin: 4px 0 9px 35px;
+        &::before {
+            @include like(url(../../assets/img/a-icon-like-1.svg));
+        }
+        &:hover {
+            cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
+            &::before {
+                @include like(url(../../assets/img/a-icon-like-hover.svg));
             }
         }
-        &_categories {
-            border-radius: 5px;
-            background-color: $blog-bg-color;
-            padding: 30px;
-            &_title {
-                @extend %regular_title_text;
-            }
-            &_wrap {
-                @include border-top(1px, $line-color);
-                width: 400px;
-                height: 291px;
-                margin-top: 4px;
-                &_item {
-                    @include border-bottom(1px, $line-color);
-                    height: 63px;
-                    &_list {
-                        @extend %secondary_text;
-                        font-weight: 500;
-                        padding: 30px 0 0 6px;
-                        position: relative;
-                        &_el {
-                            @extend %small_text;
-                            display: block;
-                            &:hover {
-                                cursor: url(../../assets/img/hand-cursor-dark.svg), pointer;
-                                font-weight: 600;
-                            }
-                        }
-                        &::after {
-                            @include blog-categories-arrow;
-                        }
-                    }
-                    &:nth-child(2) {
-                        height: 153px;
-                        .main__sidebar_categories_wrap_item_list {
-                            padding: 20px 0 7px 6px;
-                            &::after {
-                                @include blog-categories-arrow;
-                                top: 30px;
-                                transform: rotate(0.5turn);
-                            }
-                        }
-                        .main__sidebar_categories_wrap_item_list_el {
-                            padding: 4px 0 0 6px;
-                        }
-                    }
-                    &:nth-child(3) {
-                        height: 53px;
-                        .main__sidebar_categories_wrap_item_list {
-                            padding-top: 20px;
-                        }
-                    }
-                    &:nth-child(4),
-                    &:nth-child(5) {
-                        height: 48px;
-                        .main__sidebar_categories_wrap_item_list {
-                            padding-top: 14px;
-                        }
-                    }
+	}
+	&__wrap {
+        @include flex-line(120px);
+	}
+	&__item {
+        @include socials(
+            url(../../assets/img/a-icon-facebook.svg),
+            url(../../assets/img/a-icon-dribbble.svg),
+            url(../../assets/img/a-icon-instagram.svg)
+        );
+	}
+}
+.reviews {
+	&__title {
+        @extend %regular_title_text;
+	}
+	&__wrapper {
+        @include border-left(2px, $border-color);
+        width: 610px;
+        height: 830px;
+        margin: 28px 0 0 40px;
+        padding: 33px 0 0 53px;
+        position: relative;
+        &::before {
+            @include blog-review-circle;
+            top: -11px;
+        }
+        &::after {
+            @include blog-review-circle;
+            bottom: -11px;
+        }
+	}
+	&__item {                    
+        @include block(169px, 551px);
+        &::before {
+            @include review_author_img(url(../../assets/img/Neil_big.png));
+        }
+    &:nth-child(2) {
+        margin-top: 70px;
+        height: 319px;
+            .review__read {
+            margin-right: 20px;
+            &::after {
+                    width: 70px;
                 }
+            }
+            &::before {
+                @include review_author_img(
+                    url(../../assets/img/Sarah_big.png)
+                );
             }
         }
-        &_tags {
-            border-radius: 5px;
-            background-color: $blog-bg-color;
-            padding: 30px;
-            &_title {
-                @extend %regular_title_text;
-                @include border-bottom(1px, $line-color);
-                padding-bottom: 4px;
+        &:nth-child(3) {
+            margin-top: 70px;
+            height: 133px;
+            &::before {
+                @include review_author_img(url(../../assets/img/Ann_big.png));
             }
-            &_wrap {
-                width: 415px;
-                height: 185px;
-                padding-top: 15px;
-                &_btn {
-                    @extend %secondary_btn;
-                    height: auto;
-                    width: auto;
-                    margin: 15px 12px 0 0;
-                    padding: 4px 14px;
-                    &:hover {
-                        @extend %hovered_btn;
-                        height: auto;
-                        width: auto;
-                        margin: 15px 12px 0 0;
-                        padding: 4px 14px;
-                    }
+        }
+	}
+}
+.review {
+	&__info {
+        width: 541px;
+        display: inline-flex;
+        justify-content: space-between;
+        padding: 12px 9px 0 21px;
+	}
+    &__time {
+        @include review_time;
+	}
+	&__text {
+        @extend %small_text;
+        padding: 9px 19px 9px 21px;
+	}
+	&__read {
+        @extend %small_text;
+        font-weight: 500;
+        display: block;
+        text-align: right;
+        margin: 3px 19px 0 0;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            height: 1px;
+            width: 70px;
+            border-bottom: 1px solid $primary-color;
+            top: 19px;
+            right: 1px;
+        }
+	}
+	&__button {
+        @extend %secondary_btn;
+        width: 158px;
+        margin: 71px 0 0 205px;
+        &:hover {
+            @extend %hovered_btn;
+            width: 158px;
+        }
+	}
+}
+.info {
+	&__wrapper {
+    display: inline-flex;
+	}
+	&__author {
+    @extend %secondary_text;
+	}
+	&__rating {
+		@include rating;
+    margin-left: 11px;
+    &_star:last-child {
+        margin-left: -2px;
+    }
+	}
+}
+.sidebar {
+    &__posts {
+        border-radius: 5px;
+        background-color: $blog-bg-color;
+        padding: 30px;
+	}
+	&__posts-title {
+        @extend %regular_title_text;
+	}
+	&__posts-wrap {
+        @include border-top(1px, $line-color);
+        width: 400px;
+        height: 391px;
+        margin-top: 4px;
+	}
+	&__posts-item {
+        height: 150px;
+        margin-top: 30px;
+        display: flex;
+        &:last-child {
+            .posts-item__img {
+                @include blog-sidebar-img(url(../../assets/img/latest-post-img-2.png));
+            }
+	    }
+	}
+	&__posts-button {
+        @extend %secondary_btn;
+        margin-left: 275px;
+        &:hover {
+            @extend %hovered_btn;
+        }
+	}
+	&__categories {
+        border-radius: 5px;
+        background-color: $blog-bg-color;
+        padding: 30px;
+	}
+	&__categories-title {
+        @extend %regular_title_text;
+	}
+	&__categories-wrapper {
+        @include border-top(1px, $line-color);
+        width: 400px;
+        height: 291px;
+        margin-top: 4px;
+	}
+    &__categories-item {
+        @include border-bottom(1px, $line-color);
+        height: 63px;
+        &:nth-child(2) {
+            height: 153px;
+            .item__list {
+                padding: 20px 0 7px 6px;
+                &::after {
+                    @include blog-categories-arrow;
+                    top: 30px;
+                    transform: rotate(0.5turn);
                 }
+            }
+            .item__element {
+                padding: 4px 0 0 6px;
+            }
+        }
+            &:nth-child(3) {
+            height: 53px;
+            .item__list {
+                padding-top: 20px;
+            }
+        }
+        &:nth-child(4),
+        &:nth-child(5) {
+            height: 48px;
+            .item__list{
+                padding-top: 14px;
             }
         }
     }
+	&__tags {
+        border-radius: 5px;
+        background-color: $blog-bg-color;
+        padding: 30px;
+	}
+	&__tags-title {
+        @extend %regular_title_text;
+        @include border-bottom(1px, $line-color);
+        padding-bottom: 4px;
+	}
+	&__tags-wrapper {
+        width: 415px;
+        height: 185px;
+        padding-top: 15px;
+	}
+}
+.posts-item {
+	&__img {
+        @include blog-sidebar-img(url(../../assets/img/latest-post-img-1.png))
+	}
+	&__wrap {
+        padding: 33px 0 0 15px;
+	}
+}
+.wrap {
+	&__title {
+        width: 225px;
+        @extend %secondary_text;
+        line-height: 23px;
+	}
+	&__info {
+        color: #818181;
+        @extend %small_text;
+        line-height: 25px;
+        margin-top: 20px;
+	}
+	&__info-data {
+        &::after {
+            @extend %dot_separator;
+        }
+	}
+	&__info-time {
+        &::after {
+            @extend %dot_separator;
+        }
+	}
+	&__info-comments {
+        &::before {
+            @extend %comment_icon;
+        }
+	}
+}
+.item {
+	&__list {
+        @extend %secondary_text;
+        font-weight: 500;
+        padding: 30px 0 0 6px;
+        position: relative;
+        &::after {
+            @include blog-categories-arrow;
+        }
+	}
+	&__element {
+        @extend %small_text;
+        display: block;
+        &:hover {
+            cursor: url(../../assets/img/hand-cursor-dark.svg), pointer;
+            font-weight: 600;
+        }
+    }
+}
+.tags {
+	&__button {
+        @extend %secondary_btn;
+        height: auto;
+        width: auto;
+        margin: 15px 12px 0 0;
+        padding: 4px 14px;
+        &:hover {
+            @extend %hovered_btn;
+            height: auto;
+            width: auto;
+            margin: 15px 12px 0 0;
+            padding: 4px 14px;
+        }
+	}
 }
