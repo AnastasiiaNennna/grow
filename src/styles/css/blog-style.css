@@ -119,7 +119,7 @@ select {
   line-height: 32px;
 }
 
-.footer__copyrights, .post__header-info, .main__search-form {
+.footer__clock, .post__header-info, .main__search-form {
   font-size: 15px;
   line-height: 25px;
 }
@@ -397,7 +397,7 @@ select {
 .button:hover {
   background-color: #393737;
   color: #fff;
-  cursor: url(src/assets/img/hand-cursor-grey.svg), pointer;
+  cursor: url(../../assets/img/hand-cursor-grey.svg), pointer;
 }
 
 footer {
@@ -422,7 +422,7 @@ footer {
 .footer__logo {
   margin: -2px 0 0 54px;
 }
-.footer__copyrights {
+.footer__clock {
   color: #333333;
 }
 

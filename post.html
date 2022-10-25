@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="src/js/post.js" defer></script>
+        <script src="src/js/clock.js" defer></script>
+        <script src="src/js/timer.js" defer></script>
         <link rel="stylesheet" href="src/styles/css/post-style.min.css" />
         <title>Post</title>
     </head>
@@ -31,6 +33,8 @@
                     <li class="header__item">
                         <a href="#contact">Contact</a>
                     </li>
+                    <li class="header__item" id="timer">
+                    </li>
                 </nav>
             </div>
         </header>
@@ -44,7 +48,7 @@
                     <a href="https://dribbble.com/EPAM_Systems" target="_blank" class="socials__item"></a>
                 </div>
                 <div class="footer__logo logo">BlogWorld</div>
-                <div class="footer__copyrights">&copy;2022 All Rights Reserved.</div>
+                <div id="clock" class="footer__clock"></div>
             </div>
         </footer>
     </body>

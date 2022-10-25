@@ -125,7 +125,7 @@ select {
   font-weight: 500;
 }
 
-.footer__copyrights, .item__element, .wrap__info, .review__read, .review__text, .review__time, .socials__likes, .post__socials .socials__likes, .post__header-info {
+.footer__clock, .item__element, .wrap__info, .review__read, .review__text, .review__time, .socials__likes, .post__socials .socials__likes, .post__header-info {
   font-size: 15px;
   line-height: 25px;
 }
@@ -734,7 +734,7 @@ footer {
 .footer__logo {
   margin: -2px 0 0 54px;
 }
-.footer__copyrights {
+.footer__clock {
   color: #333333;
 }
 

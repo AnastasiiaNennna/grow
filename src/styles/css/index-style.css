@@ -999,7 +999,7 @@ footer {
 .footer__logo {
   margin: -2px 0 0 54px;
 }
-.footer__copyrights {
+.footer__clock {
   color: #333333;
 }
 
@@ -1042,7 +1042,7 @@ footer {
   line-height: 32px;
 }
 
-.post__text, .post__info, .portfolio__slide_text, .testimonials__author, .testimonials__author-prof, .footer__copyrights {
+.post__text, .post__info, .portfolio__slide_text, .testimonials__author, .testimonials__author-prof, .footer__clock {
   font-size: 15px;
   line-height: 25px;
 }
