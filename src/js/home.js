@@ -247,7 +247,17 @@ const initContactSection = (data) => {
                                                 </a>
                                             </p>
                                         </div>
-                                        <div class="contact__map"></div>
+                                        <div class="contact__map">
+                                            <iframe
+                                                width="380"
+                                                height="558"
+                                                style="border:0"
+                                                loading="lazy"
+                                                allowfullscreen
+                                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCZLwMMa6h9pFUkFUdirwaXa58gcmgCYQs
+                                                    &q=Central+Park,New+York+NY">
+                                            </iframe>
+                                        </div>
                                     </div>
                                 </div>`;
     sectionTitle.append(sectionHeading);
