@@ -185,20 +185,15 @@
     left: 245px;
 }
 
-@mixin blog-post($bg-img, $author-img, $icon) {
+@mixin blog-post($icon) {
     position: relative;
-    box-shadow: 0px 51px 16px -52px $shadow-color-second;
-    .item__img {
-        background: $bg-img no-repeat 100%;
-        background-size: cover;
-    }
-    .post__header::before {
-        background: $author-img no-repeat 100%;
-        background-size: cover;
-    }
     &::after {
         @extend %blog_pseudo_el;
         background: $icon no-repeat 50%;
+    }
+    &:hover {
+        box-shadow: 0px 60px 16px -52px $shadow-color-second;
+        cursor: url(../img/hand-cursor-white-h.svg), pointer;
     }
 }
 

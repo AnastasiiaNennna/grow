@@ -63,24 +63,24 @@
     &__item-video {
         grid-row: 1 / 2;
         @include blog-post(
-            url(../../assets/img/blog_post_1.png),
-            url(../../assets/img/Neil.png),
-            url(../../assets/img/a-icon-playmini.svg)
+                url(../../assets/img/a-icon-playmini.svg)
             );
         }
     &__item-audio {
         grid-row: 2 / 3;
         @include blog-post(
-            url(../../assets/img/blog_post_2.png),
-            url(../../assets/img/Sarah.png),
-            url(../../assets/img/a-icon-melody.svg)
+                url(../../assets/img/a-icon-melody.svg)
             );
+        }
+        & .post__title {
+            margin-top: 18px;
+        };
+        & .post__button {
+            margin-top: 15px;
         }
     &__item-img {
         grid-row: 3 / 4;
         @include blog-post(
-            url(../../assets/img/blog_post_3.png),
-            url(../../assets/img/Grace.png),
             url(../../assets/img/a-icon-picture.svg)
             );
         }
@@ -113,6 +113,13 @@
         grid-column: 1 / 7;
         height: 379px;
         width: 560px;
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
 	}
 	&__video-btn {
         background: url(../../assets/img/a-icon-play.svg) no-repeat 100%;
@@ -128,17 +135,15 @@
     grid-column: 7 / 14;
     position: relative;
     width: 600px;
-	&__header {
-        &::before {
-            content: "";
-            display: block;
-            border-radius: 5px;
-            position: absolute;
-            height: 52px;
-            width: 52px;
-            border-radius: 50%;
-        }
-	}
+    &__header-photo {
+        display: block;
+        border-radius: 55px;
+        position: absolute;
+        height: 52px;
+        width: 52px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 	&__header-title {
         @extend %secondary_text;
         margin: 27px 0 0 67px;
@@ -157,7 +162,16 @@
 	&__text {
         @extend %regular_text;
         width: 460px;
-        margin-top: 17px;
+        margin-top: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -moz-box;
+        display: -webkit-box;
+        line-clamp: 4;
+        -webkit-line-clamp: 4;
+        box-orient: vertical;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
 	}
 	&__btn {
         @extend %secondary_btn;
@@ -168,6 +182,9 @@
         }
 	}
 	&__audio {
+        height: 37px;
+        width: 214px;
+        margin-top: 10px;
 	}
 }
 .info {
