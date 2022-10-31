@@ -343,6 +343,8 @@ const createTestimonialsSlide = (parentNode, data) => {
         'slide__button-next',
         'slide__button-next-testimonials'
     );
+    prevButton.id = 'slide__button-prev';
+    nextButton.id = 'slide__button-next';
     for (let i = 0; i < slidesData.length; i++) {
         const parentDiv = document.createElement('div');
         parentDiv.classList.add('testimonials__slide');
