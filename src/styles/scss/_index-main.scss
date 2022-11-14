@@ -634,10 +634,16 @@
         line-height: 29px;
 	}
 }
+
 .strong {
     font-weight: bold;
     text-decoration: underline;
 }
+
 .light {
     font-weight: 400;
+}
+
+.slider-transition-active {
+  transition: 0.65s ease-in-out;
 }

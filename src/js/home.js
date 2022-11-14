@@ -8,6 +8,15 @@ const PORTFOLIO_IMAGES = [
     '/src/assets/img/portfolio_bg_3.png'
 ]
 
+const TESTIMONIALS_WRAPPER_CLASS = '.testimonials__wrap';
+const TESTIMONIALS_SLIDER_CLASS = '.testimonials__slider';
+const TESTIMONIALS_SLIDE_CLASS = '.testimonials__slide';
+const TESTIMONIALS_SLIDE_WIDTH = 560;
+const PORTFOLIO_WRAPPER_CLASS = '.portfolio__slides';
+const PORTFOLIO_SLIDER_CLASS = '.portfolio__slide-wrap';
+const PORTFOLIO_SLIDE_CLASS = '.portfolio__slide';
+const PORTFOLIO_SLIDE_WIDTH = 395;
+
 async function getData(){
     try {
         const response =  await import('../assets/data/homeData.JSON', {
@@ -27,6 +36,22 @@ const initContent = (data) => {
     initPortfolioSection(data);
     initTestimonialsSection(data);
     initContactSection(data);
+    console.log(document.querySelector('.testimonials__wrap'))
+    const testimonialSlider = new TestimonialSlider(
+        TESTIMONIALS_WRAPPER_CLASS, 
+        TESTIMONIALS_SLIDER_CLASS, 
+        TESTIMONIALS_SLIDE_CLASS, 
+        TESTIMONIALS_SLIDE_WIDTH
+    );
+    const latestPortfolioSlider = new LatestPortfolioSlider(
+        PORTFOLIO_WRAPPER_CLASS, 
+        PORTFOLIO_SLIDER_CLASS, 
+        PORTFOLIO_SLIDE_CLASS, 
+        PORTFOLIO_SLIDE_WIDTH
+    );
+
+    testimonialSlider.initSlider();
+    latestPortfolioSlider.initSlider();
 };
 
 const initAboutSection = (data) => {

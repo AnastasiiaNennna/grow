@@ -977,6 +977,10 @@ a {
   font-weight: 400;
 }
 
+.slider-transition-active {
+  transition: 0.65s ease-in-out;
+}
+
 footer {
   grid-area: footer;
   grid-column: 2/3;
