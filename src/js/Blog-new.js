@@ -16,9 +16,8 @@ class Post {
         return this.list;
     };
 
-    createArticle(parentNode, data) {
-        console.log(parentNode);
-        console.log(data);
+    createArticle() {
+        console.log('createArticle');
     };
 
     onReadMoreButtonClick() {
