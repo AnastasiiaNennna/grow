@@ -4,15 +4,15 @@ class Http {
         this._apiKey = options.apiKey;
         this._list = [];
     };
-    request(uri, method, data) {
-        return fetch(this._baseUrl + uri + this._apiKey, {
+    request(uri, query, method, data) {
+        return fetch(this._baseUrl + uri + this._apiKey + query, {
             method,
             body: data ? JSON.stringify(data) : null,
             headers: {
                 'Content-Type': 'application/json',
             },
         }).then((res) => res.json())
-        .then((data) => this.setData(data));
+            .then((data) => this.setData(data));
     };
 
     setData(data) {
@@ -20,11 +20,15 @@ class Http {
         return this._list;
     };
 
-    get(uri='') {
-        return this.request(uri, 'GET');
+    get(query='', uri='') {
+        return this.request(uri, query, 'GET');
     };
 
     list() {
         return this.get();
     };
-}
+
+    filterList(query='') {
+        return this.get(query);
+    }
+};

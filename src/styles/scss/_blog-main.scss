@@ -6,12 +6,13 @@
     display: grid;
     grid-template:100px 124px 1666px 185px / minmax(auto, 140px) minmax(auto, 1160px) minmax(auto, 140px);
     position: relative;
-    &__title {
+	&__title {
         @extend %main_title;
         text-align: center;
         grid-column: 2 / 3;
         grid-row: 1 / 2;
         margin-top: 45px;
+        @include title-underline(auto);
     }
     &__search-form {
         @extend %input;
@@ -20,6 +21,9 @@
         grid-row: 2 / 3;
         padding: 9px;
         margin: 49px 0 0 840px;
+        &#search-by-actor {
+            margin-left: 0;
+        }
     }
     &__search-elem {
         background: url(../../assets/img/a-icon-search-3.svg) no-repeat 100%;
@@ -28,7 +32,12 @@
         width: 20px;
         position: absolute;
         top: 162px;
-        right: 155px;
+        &#search-button-actor {
+            left: 430px;
+        }
+        &#search-button-title {
+            right: 155px;
+        }
     }
     &__more {
         grid-column: 2 / 3;

@@ -7,27 +7,60 @@ class Controller {
         'blog__item-img',
         'blog__item-text',
     ];
+    static TMDB = 'https://www.themoviedb.org/';
     constructor(container) {
         this.container = container;
+        this.videoBlock = null;
+        this.audioBlock = null;
+        this.imageBlock = null;
+        this.textBlock = null;
         this.title = new Title({
             container: this.container,
+            onSearch: () => this.renderContent(),
         });
+        this.filter = null;
         this.contentContainer = this.addContentContainer(this.container);
-        this.content = this.generateContent(Controller.CONTENT_CLASSES);
+        this.content = this.renderContent();
         this.addButton(this.container);
     };
 
+    renderContent() {
+        this.renderPosts();
+        this.generateContent(Controller.CONTENT_CLASSES);
+    };
+    
+    getFilter() {
+        return localStorage.getItem('filter');
+    };
+    
+    getMark() {
+        return localStorage.getItem('mark');
+    };
+    
     addContentContainer(parentDiv) {
         const wrapper = document.createElement('div');
+        wrapper.id = 'blog';
         wrapper.classList.add('blog');
         parentDiv.append(wrapper);
         return wrapper;
     };
-
+    
     generateContent(classesArray) {
-        classesArray.forEach(element => this.generateContentBlock(element));
+        const marker = this.getMark();
+        this.filter = this.getFilter();
+        if (this.filter === null || this.filter === '') {
+            return classesArray.forEach(element => this.generateContentBlock(element));
+        };
+        return classesArray.forEach(element => this.generateFilteredBlock(element, marker));
     };
-
+    
+    renderPosts() {
+        const element = document.querySelector('#blog');
+        element.remove();
+        this.contentContainer = this.addContentContainer(this.container);
+        return this.contentContainer;
+    };
+    
     generateContentBlock(blockClass) {
         switch (blockClass) {
             case Controller.CONTENT_CLASSES[0]:
@@ -41,46 +74,125 @@ class Controller {
                 break;
             case Controller.CONTENT_CLASSES[3]:
                 this.generateTextBlock(blockClass);
-                break;
+            break;
         };
     };
-
+    
     generateVideoBlock(blockClass) {
-        const videoBlock = new VideoPost({
+        this.videoBlock = new VideoPost({
             container: this.contentContainer,
             blockClass: blockClass,
             itemIndex: 0,
+            filter: this.filter,
         });
-        return videoBlock;
+        return this.videoBlock;
     };
-
+    
     generateAudioBlock(blockClass) {
-        const audioBlock = new AudioPost({
+        this.audioBlock = new AudioPost({
             container: this.contentContainer,
             blockClass: blockClass,
             itemIndex: 1,
+            filter: this.filter,
         });
-        return audioBlock;
+        return this.audioBlock;
     };
-
+    
     generateImageBlock(blockClass) {
-        const imageBlock = new ImagePost({
+        this.imageBlock = new ImagePost({
             container: this.contentContainer,
             blockClass: blockClass,
             itemIndex: 2,
+            filter: this.filter,
         });
-        return imageBlock;
+        return this.imageBlock;
     };
-
+    
     generateTextBlock(blockClass) {
-        const textBlock = new TextPost({
+        this.textBlock = new TextPost({
             container: this.contentContainer,
             blockClass: blockClass,
             itemIndex: 3,
+            filter: this.filter,
         });
-        return textBlock;
+        return this.textBlock;
     };
-
+    
+    generateFilteredBlock(blockClass, marker) {
+        switch (blockClass) {
+            case Controller.CONTENT_CLASSES[0]:
+                this.generateFilteredVideoBlock(blockClass, marker);
+                break;
+            case Controller.CONTENT_CLASSES[1]:
+                this.generateFilteredAudioBlock(blockClass, marker);
+                break;
+            case Controller.CONTENT_CLASSES[2]:
+                this.generateFilteredImageBlock(blockClass, marker);
+                break;
+            case Controller.CONTENT_CLASSES[3]:
+                this.generateFilteredTextBlock(blockClass, marker);
+            break;
+        };
+    };
+    
+    generateFilteredVideoBlock(blockClass, marker) {
+        const url = this.getSearchUrl(marker);
+        this.videoBlock = new FilterVideoPost({
+            url: url,
+            container: this.contentContainer,
+            blockClass: blockClass,
+            itemIndex: 0,
+            filter: this.filter,
+            marker: marker,
+        });
+        return this.videoBlock;
+    };
+    
+    generateFilteredAudioBlock(blockClass, marker) {
+        const url = this.getSearchUrl(marker);
+        this.audioBlock = new FilterAudioPost({
+            url: url,
+            container: this.contentContainer,
+            blockClass: blockClass,
+            itemIndex: 1,
+            filter: this.filter,
+            marker: marker,
+        });
+        return this.audioBlock;
+    };
+    
+    generateFilteredImageBlock(blockClass, marker) {
+        const url = this.getSearchUrl(marker);
+        this.imageBlock = new FilterImagePost({
+            url: url,
+            container: this.contentContainer,
+            blockClass: blockClass,
+            itemIndex: 2,
+            filter: this.filter,
+            marker: marker,
+        });
+        return this.imageBlock;
+    };
+    
+    generateFilteredTextBlock(blockClass, marker) {
+        const url = this.getSearchUrl(marker);
+        this.textBlock = new FilterTextPost({
+            url: url,
+            container: this.contentContainer,
+            blockClass: blockClass,
+            itemIndex: 3,
+            filter: this.filter,
+            marker: marker,
+        });
+        return this.textBlock;
+    };
+    
+    getSearchUrl(marker) {
+        return marker === 'actor' ?
+            `https://api.themoviedb.org/3/search/person` :
+            `https://api.themoviedb.org/3/search/movie`;
+    };
+    
     addButton(parentDiv) {
         const fragment = document.createDocumentFragment();
         const wrapper = document.createElement('div');
@@ -93,9 +205,9 @@ class Controller {
         fragment.append(wrapper);
         parentDiv.append(fragment);
     };
-
+    
     onButtonClick() {
-        window.open('https://www.themoviedb.org/');
+        window.open(Controller.TMDB);
     };
 };
 

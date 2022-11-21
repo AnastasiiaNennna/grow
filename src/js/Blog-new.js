@@ -1,8 +1,11 @@
 class Post {
     static API_KEY = '?api_key=7148347e54035e42dc1847fd6b413dd5';
     static DATA_ITEM_URL = `https://api.themoviedb.org/3/movie/`;
+    static BASE_IMAGE = './img/blog_post_1.png';
+    static TMDB = 'https://www.themoviedb.org/';
     constructor(options) {
         this.container = options.container;
+        this.filter = options.filter;
         this.apiKey = Post.API_KEY;
         this.list = [];
         this.itemUrl = Post.DATA_ITEM_URL;
@@ -21,6 +24,15 @@ class Post {
         console.log(data);
     };
 
+    getMoviePoster(url, path) {
+        let posterUrl = url + path;
+        if (path === null) {
+            posterUrl = Post.BASE_IMAGE;
+            return posterUrl;
+        };
+        return posterUrl;
+    };
+
     onReadMoreButtonClick() {
         const itemId = this.item.id;
         const getData = new Http({
@@ -31,8 +43,29 @@ class Post {
     };
 
     getMovieDetails(list) {
-        window.open(list.US.link);
+        if (list.hasOwnProperty('US')) {
+            return window.open(list.US.link);
+        }
+        return window.open(Post.TMDB);
     };
+
+    getDataList(data) {
+        return this.marker === 'actor' ?
+            data[0].known_for[this.listItem] :
+            data[this.listItem];
+    };
+
+    getPostTitle(data) {
+        return data.original_title === undefined ?
+            data.original_name :
+            data.original_title;
+    };
+
+    getPostPremier(data) {
+        return data.release_date === undefined ?
+            data.first_air_date :
+            data.release_date;
+    }
 };
 
 class VideoPost extends Post {
@@ -43,10 +76,12 @@ class VideoPost extends Post {
         super(options);
         this.blockClass = options.blockClass;
         this.listItem = options.itemIndex;
+        this.filter = options.filter;
         this.item = null;
         this.dataResource = new Http({
             baseUrl: VideoPost.DATA_URL,
             apiKey: this.apiKey,
+            filter: this.filter,
         });
         this.dataResource.list()
             .then((list) => this.renderPost(list));
@@ -137,10 +172,12 @@ class AudioPost extends Post {
         super(options);
         this.blockClass = options.blockClass;
         this.listItem = options.itemIndex;
+        this.filter = options.filter;
         this.item = null;
         this.dataResource = new Http({
             baseUrl: AudioPost.DATA_URL,
             apiKey: this.apiKey,
+            filter: this.filter,
         });
         this.dataResource.list().then((list) => this.renderPost(list));
     };
@@ -210,10 +247,12 @@ class ImagePost extends Post {
         super(options);
         this.blockClass = options.blockClass;
         this.listItem = options.itemIndex;
+        this.filter = options.filter;
         this.item = null;
         this.dataResource = new Http({
             baseUrl: ImagePost.DATA_URL,
             apiKey: this.apiKey,
+            filter: this.filter,
         });
         this.dataResource.list().then((list) => this.renderPost(list));
     };
@@ -277,10 +316,12 @@ class TextPost extends Post {
         super(options);
         this.blockClass = options.blockClass;
         this.listItem = options.itemIndex;
+        this.filter = options.filter;
         this.item = null;
         this.dataResource = new Http({
             baseUrl: TextPost.DATA_URL,
             apiKey: this.apiKey,
+            filter: this.filter,
         });
         this.dataResource.list()
             .then((list) => this.renderPost(list));
@@ -302,6 +343,366 @@ class TextPost extends Post {
                                         src="${TextPost.BASE_IMAGE_URL}${itemData.poster_path}">
                                     <div class="post__header-title">
                                         ${itemData.original_title}
+                                    </div>
+                                    <div class="post__header-info">
+                                        <span class="info__data">
+                                            Premiere ${itemData.release_date}
+                                        </span>
+                                        <span class="info__time">
+                                            ${itemData.vote_average} votes
+                                        </span>
+                                        <span class="info__comments">
+                                            ${itemData.vote_count}
+                                        </span>`;
+        articleTitle.classList.add('post__title');
+        articleTitle.textContent = itemData.title;
+        articleText.classList.add('post__text');
+        articleText.textContent = itemData.overview;
+        articleButton.classList.add('post__button', 'button', 'button-light');
+        articleButton.textContent = 'Read more';
+        article.append(articleHeader,
+            articleTitle,
+            articleText,
+            articleButton);
+        parentDiv.append(article);
+        fragment.append(parentDiv);
+        parentNode.append(fragment);
+        articleButton.addEventListener('click',
+            this.onReadMoreButtonClick.bind(this));
+        return this.item = itemData;
+    };
+};
+
+class FilterVideoPost extends Post {
+    static DATA_URL = `https://api.themoviedb.org/3/search/movie`;
+    static BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original';
+    static VIDEO_BASE_URL = 'https://www.youtube.com/watch?v=';
+    static BASE_QUERY = '&query=';
+    constructor(options) {
+        super(options);
+        this.url = options.url;
+        this.blockClass = options.blockClass;
+        this.listItem = options.itemIndex;
+        this.filter = options.filter;
+        this.marker = options.marker;
+        this.filterQuery = FilterVideoPost.BASE_QUERY + this.filter;
+        this.item = null;
+        this.dataResource = new Http({
+            baseUrl: this.url,
+            apiKey: this.apiKey,
+            filter: this.filter,
+        });
+        this.dataResource.filterList(this.filterQuery)
+            .then((list) => this.renderPost(list));
+    };
+
+    createArticle(parentNode, data) {
+        const fragment = document.createDocumentFragment();
+        const itemData = this.getDataList(data);
+        if (itemData === undefined) {
+            return;
+        };
+        const parentDiv = document.createElement('div');
+        const imageWrapper = document.createElement('div');
+        const image = document.createElement('img');
+        const article = document.createElement('div');
+        const articleHeader = document.createElement('div');
+        const articleTitle = document.createElement('h3');
+        const articleText = document.createElement('p');
+        const articleButton = document.createElement('button');
+        const videoButton = document.createElement('div');
+        parentDiv.classList.add('blog__item', this.blockClass);
+        imageWrapper.classList.add('item__img');
+        image.setAttribute('src',
+            `${this.getMoviePoster(
+                FilterVideoPost.BASE_IMAGE_URL,
+                itemData.backdrop_path
+            )}`);
+        article.classList.add('item__post', 'post');
+        articleHeader.classList.add('post__header');
+        articleHeader.innerHTML = `<img class="post__header-photo" src="
+                                    ${this.getMoviePoster(
+                                        FilterVideoPost.BASE_IMAGE_URL,
+                                        itemData.poster_path
+                                    )}
+                                    ">
+                                    <div class="post__header-title">
+                                        ${this.getPostTitle(itemData)}
+                                    </div>
+                                    <div class="post__header-info">
+                                        <span class="info__data">
+                                            Premiere ${this.getPostPremier(itemData)}
+                                        </span>
+                                        <span class="info__time">
+                                            ${itemData.vote_average} votes
+                                        </span>
+                                        <span class="info__comments">
+                                            ${itemData.vote_count}
+                                        </span>`;
+        articleTitle.classList.add('post__title');
+        articleTitle.textContent = itemData.title;
+        articleText.classList.add('post__text');
+        articleText.textContent = itemData.overview;
+        articleButton.classList.add('post__button', 'button', 'button-light');
+        articleButton.textContent = 'Read more';
+        videoButton.classList.add('item__video-button');
+        imageWrapper.append(image,
+            videoButton);
+        article.append(articleHeader,
+            articleTitle,
+            articleText,
+            articleButton);
+        parentDiv.append(imageWrapper, article);
+        fragment.append(parentDiv);
+        parentNode.append(fragment);
+        articleButton.addEventListener('click',
+            this.onReadMoreButtonClick.bind(this));
+        videoButton.addEventListener('click',
+            this.onVideoButtonClick.bind(this));
+        return this.item = itemData;
+    };
+
+    onVideoButtonClick() {
+        const itemId = this.item.id;
+        const getData = new Http({
+            baseUrl: this.itemUrl + itemId + '/videos',
+            apiKey: this.apiKey,
+        });
+        getData.list()
+            .then((list) => this.getVideoLink(list, FilterVideoPost.VIDEO_BASE_URL));
+    };
+
+    getVideoLink(list, url) {
+        const videoItem = this.getRandom(0, list.length - 1);
+        window.open(url + list[videoItem].key);
+    };
+
+    getRandom(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+};
+
+class FilterAudioPost extends Post {
+    static DATA_URL = `https://api.themoviedb.org/3/search/movie`;
+    static BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original';
+    static BASE_QUERY = '&query=';
+    constructor(options) {
+      super(options);
+      this.url = options.url;
+      this.blockClass = options.blockClass;
+      this.listItem = options.itemIndex;
+      this.filter = options.filter;
+      this.marker = options.marker;
+      this.filterQuery = FilterAudioPost.BASE_QUERY + this.filter;
+      this.item = null;
+      this.dataResource = new Http({
+        baseUrl: this.url,
+        apiKey: this.apiKey,
+        filter: this.filter,
+      });
+      this.dataResource.filterList(this.filterQuery)
+          .then((list) => this.renderPost(list));
+    };
+  
+    createArticle(parentNode, data) {
+      const fragment = document.createDocumentFragment();
+      const itemData = this.getDataList(data);
+      if (itemData === undefined) {
+        return;
+      };
+      const parentDiv = document.createElement('div');
+      const imageWrapper = document.createElement('div');
+      const image = document.createElement('img');
+      const article = document.createElement('div');
+      const articleHeader = document.createElement('div');
+      const articleTitle = document.createElement('h3');
+      const articleText = document.createElement('p');
+      const articleButton = document.createElement('button');
+      const sectionAudio = document.createElement('audio');
+      parentDiv.classList.add('blog__item', this.blockClass);
+      imageWrapper.classList.add('item__img');
+      image.setAttribute('src',
+          `${this.getMoviePoster(
+              FilterAudioPost.BASE_IMAGE_URL,
+              itemData.backdrop_path
+          )}`);
+      article.classList.add('item__post', 'post');
+      articleHeader.classList.add('post__header');
+      articleHeader.innerHTML = `<img class="post__header-photo" src="
+                                    ${this.getMoviePoster(
+                                      FilterAudioPost.BASE_IMAGE_URL,
+                                      itemData.poster_path
+                                    )}
+                                  ">
+                                  <div class="post__header-title">
+                                    ${this.getPostTitle(itemData)}
+                                  </div>
+                                  <div class="post__header-info">
+                                    <span class="info__data">
+                                      Premiere ${this.getPostPremier(itemData)}
+                                    </span>
+                                    <span class="info__time">
+                                      ${itemData.vote_average} votes
+                                    </span>
+                                    <span class="info__comments">
+                                      ${itemData.vote_count}
+                                    </span>`;
+      articleTitle.classList.add('post__title');
+      articleTitle.textContent = itemData.title;
+      articleText.classList.add('post__text');
+      articleText.textContent = itemData.overview;
+      articleButton.classList.add('post__button', 'button', 'button-light');
+      articleButton.textContent = 'Read more';
+      sectionAudio.classList.add('post__audio');
+      sectionAudio.setAttribute('controls', 'controls');
+      sectionAudio.setAttribute('src',
+          `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3`);
+      imageWrapper.append(image);
+      article.append(articleHeader,
+          articleTitle,
+          sectionAudio,
+          articleText,
+          articleButton);
+      parentDiv.append(imageWrapper, article);
+      fragment.append(parentDiv);
+      parentNode.append(fragment);
+      articleButton.addEventListener('click',
+          this.onReadMoreButtonClick.bind(this));
+      return this.item = itemData;
+    };
+};
+
+class FilterImagePost extends Post {
+    static DATA_URL = `https://api.themoviedb.org/3/search/movie`;
+    static BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original';
+    static BASE_QUERY = '&query=';
+    constructor(options) {
+        super(options);
+        this.url = options.url;
+        this.blockClass = options.blockClass;
+        this.listItem = options.itemIndex;
+        this.filter = options.filter;
+        this.marker = options.marker;
+        this.filterQuery = FilterImagePost.BASE_QUERY + this.filter;
+        this.item = null;
+        this.dataResource = new Http({
+            baseUrl: this.url,
+            apiKey: this.apiKey,
+            filter: this.filter,
+        });
+        this.dataResource.filterList(this.filterQuery)
+            .then((list) => this.renderPost(list));
+    };
+
+    createArticle(parentNode, data) {
+        const fragment = document.createDocumentFragment();
+        const itemData = this.getDataList(data);
+        if (itemData === undefined) {
+            return;
+        };
+        const parentDiv = document.createElement('div');
+        const imageWrapper = document.createElement('div');
+        const image = document.createElement('img');
+        const article = document.createElement('div');
+        const articleHeader = document.createElement('div');
+        const articleTitle = document.createElement('h3');
+        const articleText = document.createElement('p');
+        const articleButton = document.createElement('button');
+        parentDiv.classList.add('blog__item', this.blockClass);
+        imageWrapper.classList.add('item__img');
+        image.setAttribute('src',
+            `${this.getMoviePoster(
+                FilterImagePost.BASE_IMAGE_URL,
+                itemData.backdrop_path
+            )}`);
+        article.classList.add('item__post', 'post');
+        articleHeader.classList.add('post__header');
+        articleHeader.innerHTML = `<img class="post__header-photo" src="
+                                        ${this.getMoviePoster(
+                                            FilterImagePost.BASE_IMAGE_URL,
+                                            itemData.poster_path
+                                        )}
+                                    ">
+                                    <div class="post__header-title">
+                                        ${this.getPostTitle(itemData)}
+                                    </div>
+                                    <div class="post__header-info">
+                                    <span class="info__data">
+                                        Premiere ${this.getPostPremier(itemData)}
+                                    </span>
+                                    <span class="info__time">
+                                        ${itemData.vote_average} votes
+                                    </span>
+                                    <span class="info__comments">
+                                        ${itemData.vote_count}
+                                    </span>`;
+        articleTitle.classList.add('post__title');
+        articleTitle.textContent = itemData.title;
+        articleText.classList.add('post__text');
+        articleText.textContent = itemData.overview;
+        articleButton.classList.add('post__button', 'button', 'button-light');
+        articleButton.textContent = 'Read more';
+        imageWrapper.append(image);
+        article.append(articleHeader,
+            articleTitle,
+            articleText,
+            articleButton);
+        parentDiv.append(imageWrapper, article);
+        fragment.append(parentDiv);
+        parentNode.append(fragment);
+        articleButton.addEventListener('click',
+            this.onReadMoreButtonClick.bind(this));
+        return this.item = itemData;
+    };
+};
+
+class FilterTextPost extends Post {
+    static DATA_URL = `https://api.themoviedb.org/3/search/movie`;
+    static BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/original';
+    static BASE_QUERY = '&query=';
+    constructor(options) {
+        super(options);
+        this.url = options.url;
+        this.blockClass = options.blockClass;
+        this.listItem = options.itemIndex;
+        this.filter = options.filter;
+        this.marker = options.marker;
+        this.filterQuery = FilterTextPost.BASE_QUERY + this.filter;
+        this.item = null;
+        this.dataResource = new Http({
+            baseUrl: this.url,
+            apiKey: this.apiKey,
+            filter: this.filter,
+        });
+        this.dataResource.filterList(this.filterQuery)
+            .then((list) => this.renderPost(list));
+    };
+
+    createArticle(parentNode, data) {
+        const fragment = document.createDocumentFragment();
+        const itemData = this.getDataList(data);
+        if (itemData === undefined) {
+            return;
+        };
+        const parentDiv = document.createElement('div');
+        const article = document.createElement('div');
+        const articleHeader = document.createElement('div');
+        const articleTitle = document.createElement('h3');
+        const articleText = document.createElement('p');
+        const articleButton = document.createElement('button');
+        parentDiv.classList.add('blog__item', this.blockClass);
+        article.classList.add('item__post', 'post');
+        articleHeader.classList.add('post__header');
+        articleHeader.innerHTML = `<img class="post__header-photo" src="
+                                        ${this.getMoviePoster(
+                                            FilterTextPost.BASE_IMAGE_URL,
+                                            itemData.poster_path
+                                        )}
+                                    ">
+                                    <div class="post__header-title">
+                                        ${this.getPostTitle(itemData)}
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
