@@ -5,12 +5,12 @@ async function getData(){
     try {
         const response =  await import('../assets/data/blogData.json', {
                             assert: {
-                                type: 'json'
-                            }
+                                type: 'json',
+                            };
         });
-        return response.default
+        return response.default;
     } catch (err) {
-            return err
+        return err;
     }
 }
 
@@ -18,7 +18,7 @@ function init(data) {
     initTitle(data);
     initArticles(data);
     initButton(data);
-};
+}
 
 function initTitle(data) {
     const fragment = document.createDocumentFragment();
@@ -35,7 +35,7 @@ function initTitle(data) {
     fragment.append(searchInput);
     fragment.append(searchImage);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 function initArticles(data) {
     const fragment = document.createDocumentFragment();
@@ -44,7 +44,7 @@ function initArticles(data) {
     createArticle(wrapper, data);
     fragment.append(wrapper);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 function initButton(data) {
     const fragment = document.createDocumentFragment();
@@ -56,11 +56,12 @@ function initButton(data) {
     wrapper.append(button);
     fragment.append(wrapper);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 function createArticle(parentNode, data) {
     const fragment = document.createDocumentFragment();
     const articles = data.articles;
+
     for (let i = 0; i < articles.length; i++) {
         const parentDiv = document.createElement('div');
         const image = document.createElement('div');
@@ -94,12 +95,12 @@ function createArticle(parentNode, data) {
         article.append(articleText);
         parentDiv.append(image);
         parentDiv.append(article);
-        fragment.append(parentDiv)
-    };
+        fragment.append(parentDiv);
+    }
     parentNode.append(fragment);
     customizeArticles(parentNode);
     return parentNode;
-};
+}
 
 function customizeArticles(parentNode) {
     const customizeTextArticle = parentNode.getElementsByClassName(`${blogClasses[3]}`)[0];
@@ -108,6 +109,6 @@ function customizeArticles(parentNode) {
     customizeTextArticle.getElementsByClassName('item__img')[0].remove();
     videoButton.classList.add('item__video-btn');
     customizeImageArticle.append(videoButton);
-};
+}
 
-getData().then(data => init(data));
+getData().then((data) => init(data));

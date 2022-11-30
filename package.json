@@ -1,0 +1,25 @@
+{
+  "name": "grow",
+  "version": "1.0.0",
+  "description": "JS Core grow",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-google": "^0.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnastasiiaNennna/grow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnastasiiaNennna/grow/issues"
+  },
+  "homepage": "https://github.com/AnastasiiaNennna/grow#readme"
+}

@@ -1,12 +1,12 @@
 const MAIN_WRAPPER = document.querySelector('#root');
 const PORTFOLIO_IMAGES = [
-    '/src/assets/img/portfolio_bg_1.png', 
-    '/src/assets/img/portfolio_bg_2.png', 
-    '/src/assets/img/portfolio_bg_3.png', 
-    '/src/assets/img/portfolio_bg_1.png', 
-    '/src/assets/img/portfolio_bg_2.png', 
-    '/src/assets/img/portfolio_bg_3.png'
-]
+    '/src/assets/img/portfolio_bg_1.png',
+    '/src/assets/img/portfolio_bg_2.png',
+    '/src/assets/img/portfolio_bg_3.png',
+    '/src/assets/img/portfolio_bg_1.png',
+    '/src/assets/img/portfolio_bg_2.png',
+    '/src/assets/img/portfolio_bg_3.png',
+];
 
 const TESTIMONIALS_WRAPPER_CLASS = '.testimonials__wrap';
 const TESTIMONIALS_SLIDER_CLASS = '.testimonials__slider';
@@ -36,20 +36,22 @@ const initContent = (data) => {
     initPortfolioSection(data);
     initTestimonialsSection(data);
     initContactSection(data);
-    console.log(document.querySelector('.testimonials__wrap'))
-    const testimonialSlider = new TestimonialSlider(
-        TESTIMONIALS_WRAPPER_CLASS, 
-        TESTIMONIALS_SLIDER_CLASS, 
-        TESTIMONIALS_SLIDE_CLASS, 
-        TESTIMONIALS_SLIDE_WIDTH
-    );
-    const latestPortfolioSlider = new LatestPortfolioSlider(
-        PORTFOLIO_WRAPPER_CLASS, 
-        PORTFOLIO_SLIDER_CLASS, 
-        PORTFOLIO_SLIDE_CLASS, 
-        PORTFOLIO_SLIDE_WIDTH
-    );
-
+    const testimonialSlider = new TestimonialSlider({
+        container: TESTIMONIALS_WRAPPER_CLASS,
+        slider: TESTIMONIALS_SLIDER_CLASS,
+        slides: TESTIMONIALS_SLIDE_CLASS,
+        width: TESTIMONIALS_SLIDE_WIDTH,
+        prevBtn: document.querySelector('.slide__button-prev-testimonials'),
+        nextBtn: document.querySelector('.slide__button-next-testimonials'),
+    });
+    const latestPortfolioSlider = new LatestPortfolioSlider({
+        container: PORTFOLIO_WRAPPER_CLASS,
+        slider: PORTFOLIO_SLIDER_CLASS,
+        slides: PORTFOLIO_SLIDE_CLASS,
+        width: PORTFOLIO_SLIDE_WIDTH,
+        prevBtn: document.querySelector('.slide__button-prev-portfolio'),
+        nextBtn: document.querySelector('.slide__button-next-portfolio'),
+    });
     testimonialSlider.initSlider();
     latestPortfolioSlider.initSlider();
 };
@@ -323,7 +325,7 @@ const createBlogPost = (parentNode, data) => {
                         </div>`;
         fragment.append(parentDiv);
         parentNode.append(fragment);
-    };
+    }
     return parentNode;
 };
 
@@ -331,8 +333,9 @@ const createPortfolioSlide = (parentNode, data) => {
     const fragment = document.createDocumentFragment();
     const sliderWrapper = document.createElement('div');
     const sliderControls = document.createElement('div');
-    sliderWrapper.classList.add('portfolio__slide-wrap')
+    sliderWrapper.classList.add('portfolio__slide-wrap');
     const slides = data.sections[2].slides;
+
     for (let i = 0; i < slides.length; i++) {
         const parentDiv = document.createElement('div');
         parentDiv.classList.add('portfolio__slide');
@@ -348,7 +351,7 @@ const createPortfolioSlide = (parentNode, data) => {
                                 <a href="#"
                                     class="portfolio__slide_hover hover_lens"></a>`;
         sliderWrapper.append(parentDiv);
-    };
+    }
     sliderControls.classList.add('slide__buttons_wrap');
     sliderControls.innerHTML = `<button class="slide__button slide__button-prev slide__button-prev-portfolio">
                                 </button_slide_button>
@@ -371,15 +374,16 @@ const createTestimonialsSlide = (parentNode, data) => {
     prevButton.classList.add(
         'slide__button',
         'slide__button-prev',
-        'slide__button-prev-testimonials'
+        'slide__button-prev-testimonials',
     );
     nextButton.classList.add(
         'slide__button',
         'slide__button-next',
-        'slide__button-next-testimonials'
+        'slide__button-next-testimonials',
     );
     prevButton.id = 'slide__button-prev';
     nextButton.id = 'slide__button-next';
+
     for (let i = 0; i < slidesData.length; i++) {
         const parentDiv = document.createElement('div');
         parentDiv.classList.add('testimonials__slide');
@@ -396,11 +400,11 @@ const createTestimonialsSlide = (parentNode, data) => {
                         <img src='${slidesData[i].image}'>
                     </div>`;
         sliderWrapper.append(parentDiv);
-    };
+    }
     sliderControls.append(prevButton, nextButton);
     fragment.append(sliderWrapper, sliderControls);
     parentNode.append(fragment);
     return parentNode;
 };
 
-getData().then(data => initContent(data));
+getData().then((data) => initContent(data));

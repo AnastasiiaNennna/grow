@@ -9,11 +9,11 @@ const startTimer = () => {
         timerStart = parseInt(Date.now());
         document.querySelector('#timer').innerHTML = `Time: ${parseInt(timeOnWebsite/1000)}`;
     }, 1000);
-}
+};
 
 const getTimeOnWebsite = () => {
     return timeOnWebsite = isNaN(timeOnWebsite) ? 0 : timeOnWebsite;
-}
+};
 
 startTimer();
 
@@ -26,7 +26,7 @@ document.querySelector('#timer').addEventListener('mouseout', (event) => {
 });
 
 document.addEventListener('keyup', (event) => {
-    if (event.key === "Escape") {
+    if (event.key === 'Escape') {
         timer = 0;
         timerStart = 0;
         timeOnWebsite = 0;

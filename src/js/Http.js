@@ -27,7 +27,6 @@ class Http {
 
     list() {
         return this.get();
-    }
 
     filterList(query='') {
         return this.get(query);

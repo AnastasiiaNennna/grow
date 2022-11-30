@@ -22,48 +22,48 @@ const onBtnClick = () => {
 };
 
 const onFindUserClick = () => {
-    let xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('GET', `${USERS_URL}/${lastUserId}`);
     xhr.send();
     xhr.onload = () => {
-        xhr.status != 200
-            ? alert(`${xhr.status}: ${xhr.statusText}`)
-            : showUserData(JSON.parse(xhr.response));
+        xhr.status != 200 ?
+            alert(`${xhr.status}: ${xhr.statusText}`) :
+            showUserData(JSON.parse(xhr.response));
     };
-    xhr.onerror = (err) => alert(err)
-}
+    xhr.onerror = (err) => alert(err);
+};
 
 btnEl.addEventListener('click', onBtnClick);
 findUser.addEventListener('click', onFindUserClick);
 
 const sortUsers = (users) => {
-    return users.sort((a, b) => a.id > b.id ? 1 : -1)
-}
+    return users.sort((a, b) => a.id > b.id ? 1 : -1);
+};
 
 const showUsersData = (users) => {
     findUser.classList.remove('hidden');
     dataWrap.innerHTML = '';
     lastUserId = users[users.length - 1].id;
-    users.forEach(user => {
-        dataWrap.insertAdjacentHTML('beforeend', 
-                            `<div>
+    users.forEach((user) => {
+        dataWrap.insertAdjacentHTML('beforeend',
+            `<div>
                                 <img src="${user.avatar_url}">
                                 <a href="${user.html_url}">${user.login}</a>
                                 <p> Id: ${user.id}</p>
                                 <p> Type: ${user.type} </p>
-                            </div>`
-    )});
-    
+                            </div>`,
+        );
+    });
 };
 
 const showUserData = (user) => {
     dataWrap.innerHTML = '';
-    dataWrap.insertAdjacentHTML('beforeend', 
-                            `<div>
+    dataWrap.insertAdjacentHTML('beforeend',
+        `<div>
                                 <img src="${user.avatar_url}">
                                 <a href="${user.html_url}">${user.login}</a>
                                 <p> Id: ${user.id}</p>
                                 <p> Type: ${user.type} </p>
-                            </div>`
+                            </div>`,
     );
 };

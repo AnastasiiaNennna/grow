@@ -6,13 +6,13 @@ const QUESTION_MARK = 63;
 const POINT = 46;
 const COMMA = 44;
 const CHARACTERS = [
-    SPACEBAR, 
-    EXCLAMATION_MARK, 
+    SPACEBAR,
+    EXCLAMATION_MARK,
     COLON,
-    MINUS, 
-    QUESTION_MARK, 
-    POINT, 
-    COMMA
+    MINUS,
+    QUESTION_MARK,
+    POINT,
+    COMMA,
 ];
 const FIRST_UPPERCASE_LETTER = 65;
 const LAST_UPPERCASE_LETTER = 90;
@@ -33,29 +33,29 @@ const validateTitle = (value) => {
 
 const isTitleValid = (value) => {
     switch (false) {
-        case (value !== ''):
-            console.log('Title cannot be empty');
-            return false;
-        case (isTitleLengthValid(value)):
-            console.log('Title must be more than 2 characters and less than 20');
-            return false;
-        case (isFirstSighValid(value.charAt(0))):
-            console.log('First sigh must be a letter in uppercase');
-            return false;
-        case (isTitleCharsValid(value)):
-            console.log(`Title can contain latin letter (in uppercase or lowercase), 
+    case (value !== ''):
+        console.log('Title cannot be empty');
+        return false;
+    case (isTitleLengthValid(value)):
+        console.log('Title must be more than 2 characters and less than 20');
+        return false;
+    case (isFirstSighValid(value.charAt(0))):
+        console.log('First sigh must be a letter in uppercase');
+        return false;
+    case (isTitleCharsValid(value)):
+        console.log(`Title can contain latin letter (in uppercase or lowercase), 
             numbers and special characters: space ! : - ? . ,`);
-            return false;
-        default: return true;
+        return false;
+    default: return true;
     };
 };
 
 const isFirstSighValid = (sigh) => {
     switch (false) {
-        case (sigh.charCodeAt(0) !== SPACEBAR): return false;
-        case (sigh.charCodeAt(0) <= LAST_UPPERCASE_LETTER &&
+    case (sigh.charCodeAt(0) !== SPACEBAR): return false;
+    case (sigh.charCodeAt(0) <= LAST_UPPERCASE_LETTER &&
                 sigh.charCodeAt(0) >= FIRST_UPPERCASE_LETTER): return false;
-        default: return true;
+    default: return true;
     };
 };
 
@@ -79,11 +79,11 @@ const isTitleCharsValid = (title) => {
 
 const isTitleCharValid = (char) => {
     switch (true) {
-        case (char <= LAST_LOWERCASE_LETTER && char >= FIRST_LOWERCASE_LETTER): return true;
-        case (char <= LAST_UPPERCASE_LETTER && char >= FIRST_UPPERCASE_LETTER): return true;
-        case (char <= DIGIT_NINE && char >= DIGIT_ZERO): return true;
-        case (CHARACTERS.includes(char)): return true;
-        default: return false;
+    case (char <= LAST_LOWERCASE_LETTER && char >= FIRST_LOWERCASE_LETTER): return true;
+    case (char <= LAST_UPPERCASE_LETTER && char >= FIRST_UPPERCASE_LETTER): return true;
+    case (char <= DIGIT_NINE && char >= DIGIT_ZERO): return true;
+    case (CHARACTERS.includes(char)): return true;
+    default: return false;
     };
 };
 

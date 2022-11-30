@@ -37,7 +37,7 @@ const pricesTableHeadTemplate = `<thead>
                                     <th>Discount</th>
                                 </thead>`;
 const products = [
-    { 
+    {
         id: 1,
         name: 'Apples (Ukraine)',
         salePrice: 12.50,
@@ -45,14 +45,14 @@ const products = [
         discount: 15,
         shopMargin: null,
     },
-    { 
+    {
         id: 2,
         name: 'Orange',
         salePrice: null,
         purchasePrice: 12.50,
         discount: null,
         shopMargin: 15,
-    }
+    },
 ];
 
 
@@ -70,10 +70,10 @@ const handleClick = (event) => {
     event.stopPropagation();
     const buttonId = event.target.id;
     switch (buttonId) {
-        case getPricesBtnId: getPrices(products); break;
-        case priceTagsFirstBtnId: getPriceTagsFirstWay(products); break;
-        case priceTagsSecondBtnId: getPriceTagsSecondWay(); break;
-        default: break;
+    case getPricesBtnId: getPrices(products); break;
+    case priceTagsFirstBtnId: getPriceTagsFirstWay(products); break;
+    case priceTagsSecondBtnId: getPriceTagsSecondWay(); break;
+    default: break;
     };
 };
 
@@ -84,7 +84,7 @@ const getPrices = (products) => {
     pricesWrapper.classList.add(tableWrapperClass);
     pricesWrapper.insertAdjacentHTML('afterbegin', pricesTableHeadTemplate);
     const tableBody = document.createElement('tbody');
-    products.forEach(product => addPricesToHTML(product, tableBody));
+    products.forEach((product) => addPricesToHTML(product, tableBody));
     pricesWrapper.append(tableBody);
     contentWrapperElement.append(pricesWrapper);
 };
@@ -136,7 +136,7 @@ const getDiscountPrice = (discount, price) => !!discount ? calcDiscountPrice(pri
 
 const getSalePrice = (product) => {
     return !!product.salePrice ? product.salePrice : calcSalePrice(product.purchasePrice, product.shopMargin);
-}
+};
 
 const calcSalePrice = (price, percents) => (price + ((price * percents) / HUNDRED_VALUE)).toFixed(ROUNDING_VALUE);
 
@@ -149,7 +149,7 @@ const addButtons = (products) => {
     const tagsButtonsTitle = document.createElement('h2');
     tagsButtonsTitle.innerHTML = buttonsTagTitle;
     tagsButtonsWrapper.append(tagsButtonsTitle);
-    products.forEach(product => addProductButtonsToHTML(product, tagsButtonsWrapper));
+    products.forEach((product) => addProductButtonsToHTML(product, tagsButtonsWrapper));
     contentWrapperElement.append(tagsButtonsWrapper);
     document.querySelector(`.${buttonsTagClass}`).addEventListener('click', showTag);
 };
