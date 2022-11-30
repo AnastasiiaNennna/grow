@@ -8,11 +8,11 @@ const tickets = (person) => {
         return 'YES';
     }
     return 'NO';
-}
+};
 
 const isChangePossible = (arr) => {
     if (typeof arr !== 'object') {
-        return 'Invalid data'; 
+        return 'Invalid data';
     }
 
     let twentyFiveBills = 0;
@@ -22,29 +22,29 @@ const isChangePossible = (arr) => {
             return 'Invalid data';
         }
         switch (+arr[i]) {
-            case 25:
-                twentyFiveBills++;
-                break;
-            case 50:
-                fiftyBills++;
-                twentyFiveBills--;
-                break;
-            case 100:
-                if (fiftyBills > 0) {
+        case 25:
+            twentyFiveBills++;
+            break;
+        case 50:
+            fiftyBills++;
+            twentyFiveBills--;
+            break;
+        case 100:
+            if (fiftyBills > 0) {
                 fiftyBills--;
                 twentyFiveBills--;
-                } else {
+            } else {
                 fiftyBills -= 3;
-                };
-                break;
-            }
+            };
+            break;
+        }
 
         if (twentyFiveBills < 0 || fiftyBills < 0) {
             return false;
         }
     }
     return true;
-}
+};
 
 console.log(tickets([25, 25, 50])); // +
 console.log(tickets([25, 100])); // -
@@ -57,20 +57,19 @@ console.log(tickets(['25', '-50', '100'])); // invalid data
 console.log(tickets([25, 25, 50, -100])); // invalid data
 
 
-
 const getSum = (str1, str2) => {
     let numOne = str1;
     let numTwo = str2;
 
-        if (numTwo.length > numOne.length) {
-            numOne = '0'.repeat(numTwo.length - numOne.length) + numOne;
-        } else if (numOne.length > numTwo.length) {
-            numTwo = '0'.repeat(numOne.length - numTwo.length) + numTwo;
-        }
+    if (numTwo.length > numOne.length) {
+        numOne = '0'.repeat(numTwo.length - numOne.length) + numOne;
+    } else if (numOne.length > numTwo.length) {
+        numTwo = '0'.repeat(numOne.length - numTwo.length) + numTwo;
+    }
 
     const result = calculateSum(numOne, numTwo);
     return result;
-}
+};
 
 const calculateSum = (numOne, numTwo) => {
     let result = '';
@@ -108,7 +107,7 @@ const calculateSum = (numOne, numTwo) => {
         result += resultInMind[i];
     }
     return result;
-}
+};
 
 console.log(getSum('111111111111111111111111111111111111111111111111111',
     '23333333333333333333333333333333333333333333333333'));

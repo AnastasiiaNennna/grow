@@ -12,7 +12,7 @@ class Http {
                 'Content-Type': 'application/json',
             },
         }).then((res) => res.json())
-        .then((data) => this.setData(data));
+            .then((data) => this.setData(data));
     };
 
     setData(data) {

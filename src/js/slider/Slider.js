@@ -14,14 +14,14 @@ function Slider(container, slider, slides, width) {
         this.addTransform();
         addCloneNodes();
         this.startSlider();
-    }
+    };
 
     this.onTransitionEnd = () => {
         this.slides = getSlides();
         switch (true) {
-            case (this.slides[index].id === firstClone.id):
-                switchToFirstSlide(); break;
-            case (this.slides[index].id === lastClone.id): switchToLastSlide(); break;
+        case (this.slides[index].id === firstClone.id):
+            switchToFirstSlide(); break;
+        case (this.slides[index].id === lastClone.id): switchToLastSlide(); break;
         };
     };
 

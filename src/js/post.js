@@ -5,7 +5,7 @@ async function getData(){
         const response =  await import('../assets/data/postData.json', {
                             assert: {
                                 type: 'json'
-                            } 
+                            }
         });
         return response.default
     } catch (err) {
@@ -16,7 +16,7 @@ async function getData(){
 function init(data) {
     initPostSection(data);
     initSideSection(data);
-};
+}
 
 function initPostSection(data) {
     const fragment = document.createDocumentFragment();
@@ -35,16 +35,16 @@ function initPostSection(data) {
     sectionAudio.setAttribute('src', `${data.audio}`);
     createPostHeading(sectionHeading, data);
     section.append(sectionTitle,
-                    sectionHeading,
-                    sectionImage,
-                    sectionAudio,
-                    createPostArticle(data),
-                    createPostSocials(data),
-                    createPostReviews(data)
+        sectionHeading,
+        sectionImage,
+        sectionAudio,
+        createPostArticle(data),
+        createPostSocials(data),
+        createPostReviews(data),
     );
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 function initSideSection(data) {
     const fragment = document.createDocumentFragment();
@@ -136,7 +136,7 @@ function initSideSection(data) {
                             </div>`;
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 function createPostHeading(parentDiv, data) {
     parentDiv.innerHTML = `<div class="post__header-title">${data.author}</div>
@@ -153,7 +153,7 @@ function createPostHeading(parentDiv, data) {
                                 </div>
                             </div>`;
     return parentDiv;
-};
+}
 
 function createPostArticle(data) {
     const fragment = document.createDocumentFragment();
@@ -166,7 +166,7 @@ function createPostArticle(data) {
     fragment.append(sixthArticleParagraph(articleData[5]));
     fragment.append(seventhArticleParagraph(articleData[6]));
     return fragment;
-};
+}
 
 function firstArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -177,7 +177,7 @@ function firstArticleParagraph(data) {
                             ${data.end_text}`;
     fragment.append(paragraph);
     return fragment;
-};
+}
 
 function secondArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -186,7 +186,7 @@ function secondArticleParagraph(data) {
     paragraph.textContent = data.main_text;
     fragment.append(paragraph);
     return fragment;
-};
+}
 
 function thirdArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -197,7 +197,7 @@ function thirdArticleParagraph(data) {
                             ${data.main_text}`;
     fragment.append(paragraph);
     return fragment;
-};
+}
 
 function forthArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -209,7 +209,7 @@ function forthArticleParagraph(data) {
     paragraph.textContent = data.main_text;
     fragment.append(title, paragraph);
     return fragment;
-};
+}
 
 function fifthArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -220,7 +220,7 @@ function fifthArticleParagraph(data) {
                             ${data.main_text}`;
     fragment.append(paragraph);
     return fragment;
-};
+}
 
 function sixthArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -230,7 +230,7 @@ function sixthArticleParagraph(data) {
                             ${data.main_text}`;
     fragment.append(paragraph);
     return fragment;
-};
+}
 
 function seventhArticleParagraph(data) {
     const fragment = document.createDocumentFragment();
@@ -244,7 +244,7 @@ function seventhArticleParagraph(data) {
                             ${data.end_text}`;
     fragment.append(title, paragraph);
     return fragment;
-};
+}
 
 function createPostSocials(data) {
     const fragment = document.createDocumentFragment();
@@ -259,7 +259,7 @@ function createPostSocials(data) {
                                 </div>`;
     fragment.append(socialsWrapper);
     return fragment;
-};
+}
 
 function createPostReviews(data) {
     const fragment = document.createDocumentFragment();
@@ -271,7 +271,7 @@ function createPostReviews(data) {
     section.append(sectionTitle, createReviews(data));
     fragment.append(section);
     return fragment;
-};
+}
 
 function createReviews(data) {
     const reviewData = data.reviews;
@@ -281,6 +281,7 @@ function createReviews(data) {
     reviewWrapper.classList.add('reviews__wrapper');
     button.classList.add('review__button', 'button', 'button-light');
     button.innerHTML = data.more_reviews;
+
     for (let i = 0; i < reviewData.length; i++) {
         const parentDiv = document.createElement('div');
         parentDiv.classList.add('reviews__item', 'review');
@@ -302,16 +303,16 @@ function createReviews(data) {
                                 <p class="review__text">${reviewData[i].review}</p>
                                 <a class="review__read" href="#">Read more</a>`;
         reviewWrapper.append(parentDiv);
-    };
+    }
     reviewWrapper.append(button);
     fragment.append(reviewWrapper);
     customizeLastReview(reviewWrapper);
     return fragment;
-};
+}
 
 function customizeLastReview(node) {
     const lastReview = node.getElementsByClassName('review')[2];
     lastReview.lastChild.remove();
-};
+}
 
-getData().then(data => init(data));
+getData().then((data) => init(data));

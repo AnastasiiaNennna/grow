@@ -25,23 +25,23 @@ class Controller {
     };
 
     generateContent(classesArray) {
-        classesArray.forEach(element => this.generateContentBlock(element));
+        classesArray.forEach((element) => this.generateContentBlock(element));
     };
 
     generateContentBlock(blockClass) {
         switch (blockClass) {
-            case Controller.CONTENT_CLASSES[0]:
-                this.generateVideoBlock(blockClass);
-                break;
-            case Controller.CONTENT_CLASSES[1]:
-                this.generateAudioBlock(blockClass);
-                break;
-            case Controller.CONTENT_CLASSES[2]:
-                this.generateImageBlock(blockClass);
-                break;
-            case Controller.CONTENT_CLASSES[3]:
-                this.generateTextBlock(blockClass);
-                break;
+        case Controller.CONTENT_CLASSES[0]:
+            this.generateVideoBlock(blockClass);
+            break;
+        case Controller.CONTENT_CLASSES[1]:
+            this.generateAudioBlock(blockClass);
+            break;
+        case Controller.CONTENT_CLASSES[2]:
+            this.generateImageBlock(blockClass);
+            break;
+        case Controller.CONTENT_CLASSES[3]:
+            this.generateTextBlock(blockClass);
+            break;
         };
     };
 
