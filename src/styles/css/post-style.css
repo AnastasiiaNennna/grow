@@ -771,6 +771,7 @@ footer {
 .header__item:last-child {
   padding-left: 5px;
   text-align: right;
+  width: 100px;
 }
 .header__item:nth-child(2) {
   margin-left: -2px;

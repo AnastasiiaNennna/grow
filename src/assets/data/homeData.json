@@ -3,7 +3,7 @@
         {
             "id": "1",
             "title": "About us",
-            "subtitle": "This is who we are - or at least who we strive to be…",
+            "subtitle": "This is who we are - or at least who we strive to be organized, processed and available to the right people",
             "tabsTitles": ["Typography", "Icon set", "Accurate"]
         },
         {
@@ -14,7 +14,7 @@
                 {
                     "id": "1",
                     "title": "In the Future We Will All Live in Star Wars",
-                    "text": "The thing you’re doing now, reading prose on a screen, is going out of fashion. The defining narrative of our online moment concerns the decline of text, and the exploding reach and power of audio and video…",
+                    "text": "The thing you’re doing now, reading prose on a screen, is going out of fashion. The defining narrative of our online moment concerns the decline of text, and the exploding reach and power of audio and video. The Internet of Things (IoT) promises to be the most important technological development for consumers since the advent of the smartphone.",
                     "info": {
                         "date": "20 oct, 2019",
                         "reading": "10 min read",
@@ -23,8 +23,8 @@
                 },
                 {
                     "id": "2",
-                    "title": "Rubik’s Cube? No, Robotics and AI are…",
-                    "text": "In other words, I will try to de-hype the crowd about the recent development in robotics. Concretely, OpenAI has claimed some pretty amazing results with learning to solve the Rubik’s cube with a robotic hand…",
+                    "title": "Rubik’s Cube? No, Robotics and AI are organized, processed and available to the right people",
+                    "text": "In other words, I will try to de-hype the crowd about the recent development in robotics. Concretely, OpenAI has claimed some pretty amazing results with learning to solve the Rubik’s cube with a robotic hand. The Internet of Things (IoT) promises to be the most important technological development for consumers since the advent of the smartphone.",
                     "info": {
                         "date": "11 oct, 2019",
                         "reading": "7 min read",
@@ -33,8 +33,8 @@
                 },
                 {
                     "id": "3",
-                    "title": "How the Internet of Things will Transfo…",
-                    "text": "The Internet of Things (IoT) promises to be the most important technological development for consumers since the advent of the smartphone. Experts believe that this collection of internet-connected technolog…",
+                    "title": "How the Internet of Things will Transform organized, processed and available to the right people",
+                    "text": "The Internet of Things (IoT) promises to be the most important technological development for consumers since the advent of the smartphone. Experts believe that this collection of internet-connected technology. The Internet of Things (IoT) promises to be the most important technological development for consumers since the advent of the smartphone.",
                     "info": {
                         "date": "28 sep, 2019",
                         "reading": "16 min read",

@@ -208,6 +208,7 @@ select {
 .header__item:last-child {
   padding-left: 5px;
   text-align: right;
+  width: 100px;
 }
 .header__item:nth-child(2) {
   margin-left: -2px;
@@ -586,8 +587,26 @@ a {
 .post__description {
   margin-top: 20px;
 }
+.post__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+}
 .post__text {
   margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
 }
 .post__info {
   color: #818181;
@@ -1062,7 +1081,7 @@ footer {
   margin: 0 5px 0 -1px;
 }
 
-.post__info-data::after, .post__info-time::after {
+.post__info-date::after, .post__info-time::after {
   content: "";
   display: inline-block;
   width: 3px;

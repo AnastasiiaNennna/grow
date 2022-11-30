@@ -3,6 +3,7 @@ class Post {
     static DATA_ITEM_URL = `https://api.themoviedb.org/3/movie/`;
     static BASE_IMAGE = './img/blog_post_1.png';
     static TMDB = 'https://www.themoviedb.org/';
+    static MONTH = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
 
     constructor(options) {
         this.container = options.container;
@@ -17,12 +18,30 @@ class Post {
         this.createArticle(fragment, list);
         this.container.append(fragment);
         this.list = list;
+        this.initRatings();
         return this.list;
     }
 
     createArticle(parentNode, data) {
         console.log(parentNode);
         console.log(data);
+    }
+
+    initRatings() {
+        const ratings = document.querySelectorAll('.rating__body');
+
+        if (ratings.length > 0) {
+            this.#initRatings(ratings);
+        }
+    }
+
+    #initRatings(ratings) {
+        for (let i = 0; i < ratings.length; i++) {
+            const rating = ratings[i];
+            let ratingValue = rating.querySelector('.rating__value');
+            let ratingActive = rating.querySelector('.rating__active');
+            ratingActive.style.width = `${ratingValue.innerHTML.trim()*10}%`;
+        }
     }
 
     getMoviePoster(url, path) {
@@ -66,9 +85,15 @@ class Post {
     }
 
     getPostPremier(data) {
-        return data.release_date === undefined ?
-            data.first_air_date :
-            data.release_date;
+        const date = data.release_date === undefined
+                        ? data.first_air_date
+                        : data.release_date;
+        return this.convertDate(date);
+    }
+
+    convertDate(date) {
+        const dateArray = date.split('-');
+        return `${dateArray[2]} ${Post.MONTH[+dateArray[1]]}, ${dateArray[0]}`;
     }
 }
 
@@ -110,6 +135,7 @@ class VideoPost extends Post {
             `${VideoPost.BASE_IMAGE_URL}${itemData.backdrop_path}`);
         article.classList.add('item__post', 'post');
         articleHeader.classList.add('post__header');
+        console.log(itemData)
         articleHeader.innerHTML = `<img class="post__header-photo" 
                                         src="${VideoPost.BASE_IMAGE_URL}${itemData.poster_path}">
                                     <div class="post__header-title">
@@ -117,11 +143,21 @@ class VideoPost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${itemData.release_date}
+                                            ${this.convertDate(itemData.release_date)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                            <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
@@ -202,6 +238,7 @@ class AudioPost extends Post {
         const sectionAudio = document.createElement('audio');
         parentDiv.classList.add('blog__item', this.blockClass);
         imageWrapper.classList.add('item__img');
+        console.log(itemData)
         image.setAttribute('src',
             `${AudioPost.BASE_IMAGE_URL}${itemData.backdrop_path}`);
         article.classList.add('item__post', 'post');
@@ -213,11 +250,21 @@ class AudioPost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${itemData.release_date}
+                                            ${this.convertDate(itemData.release_date)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                            <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
@@ -276,6 +323,7 @@ class ImagePost extends Post {
         const articleButton = document.createElement('button');
         parentDiv.classList.add('blog__item', this.blockClass);
         imageWrapper.classList.add('item__img');
+        console.log(itemData)
         image.setAttribute('src',
             `${ImagePost.BASE_IMAGE_URL}${itemData.backdrop_path}`);
         article.classList.add('item__post', 'post');
@@ -287,11 +335,21 @@ class ImagePost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${itemData.release_date}
+                                            ${this.convertDate(itemData.release_date)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                            <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
@@ -336,6 +394,7 @@ class TextPost extends Post {
     createArticle(parentNode, data) {
         const fragment = document.createDocumentFragment();
         const itemData = data[this.listItem];
+        console.log(itemData)
         const parentDiv = document.createElement('div');
         const article = document.createElement('div');
         const articleHeader = document.createElement('div');
@@ -352,11 +411,21 @@ class TextPost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${itemData.release_date}
+                                            ${this.convertDate(itemData.release_date)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                            <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
@@ -440,11 +509,21 @@ class FilterVideoPost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${this.getPostPremier(itemData)}
+                                            ${this.getPostPremier(itemData)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                        <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
@@ -553,11 +632,21 @@ class FilterAudioPost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${this.getPostPremier(itemData)}
+                                            ${this.getPostPremier(itemData)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                        <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
@@ -645,11 +734,21 @@ class FilterImagePost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                     <span class="info__data">
-                                        Premiere ${this.getPostPremier(itemData)}
+                                        ${this.getPostPremier(itemData)}
                                     </span>
-                                    <span class="info__time">
-                                        ${itemData.vote_average} votes
-                                    </span>
+                                    <div class="rating__body">
+                                    <div class="rating__active"></div>
+                                        <div class="rating__items">
+                                            <input type="radio" class="rating__item" value="1" name="rating">
+                                            <input type="radio" class="rating__item" value="2" name="rating">
+                                            <input type="radio" class="rating__item" value="3" name="rating">
+                                            <input type="radio" class="rating__item" value="4" name="rating">
+                                            <input type="radio" class="rating__item" value="5" name="rating">
+                                        </div>
+                                        <span class="rating__value">
+                                            ${itemData.vote_average}
+                                        </span>
+                                    </div>
                                     <span class="info__comments">
                                         ${itemData.vote_count}
                                     </span>`;
@@ -724,11 +823,21 @@ class FilterTextPost extends Post {
                                     </div>
                                     <div class="post__header-info">
                                         <span class="info__data">
-                                            Premiere ${itemData.release_date}
+                                            ${this.convertDate(itemData.release_date)}
                                         </span>
-                                        <span class="info__time">
-                                            ${itemData.vote_average} votes
-                                        </span>
+                                        <div class="rating__body">
+                                            <div class="rating__active"></div>
+                                            <div class="rating__items">
+                                                <input type="radio" class="rating__item" value="1" name="rating">
+                                                <input type="radio" class="rating__item" value="2" name="rating">
+                                                <input type="radio" class="rating__item" value="3" name="rating">
+                                                <input type="radio" class="rating__item" value="4" name="rating">
+                                                <input type="radio" class="rating__item" value="5" name="rating">
+                                            </div>
+                                            <span class="rating__value">
+                                                ${itemData.vote_average}
+                                            </span>
+                                        </div>
                                         <span class="info__comments">
                                             ${itemData.vote_count}
                                         </span>`;
