@@ -4,6 +4,7 @@ function Slider(options) {
     this.slides = document.querySelectorAll(options.slides);
     this.slidesSelector = options.slides;
     this.slideWidth = options.width;
+
     const firstClone = this.slides[0].cloneNode(true);
     const lastClone = this.slides[this.slides.length - 1].cloneNode(true);
     const interval = 3000;
@@ -19,6 +20,7 @@ function Slider(options) {
 
     this.onTransitionEnd = () => {
         this.slides = getSlides();
+
         switch (true) {
             case (this.slides[index].id === firstClone.id):
                 switchToFirstSlide(); break;
@@ -51,6 +53,7 @@ function Slider(options) {
         slideId = setInterval(() => {
 
             if (index <= 0) return;
+
             index--;
             addTransition();
             addTransform();
