@@ -10,7 +10,6 @@ function Slider(options) {
     const interval = 3000;
     let index = 1;
     let slideId;
-    let isReverse = false;
 
     this.initSlider = () => {
         addTransform();
@@ -32,35 +31,29 @@ function Slider(options) {
     this.onSliderHover = () => clearInterval(slideId);
 
     this.onNextSlideButtonClick = () => {
-        isReverse = false;
-        clearInterval(slideId);
-        slideId = setInterval(() => {
-            this.slides = getSlides();
+        this.slides = getSlides();
 
-            if (index >= this.slides.length - 1) {
-                return;
-            }
+        if (index >= this.slides.length - 1) return;
 
-            index++;
-            addTransition();
-            addTransform();
-        }, interval);
+        index++;
+        addTransition();
+        addTransform();
     }
 
     this.onPrevSlideButtonClick = () => {
-        isReverse = true;
-        clearInterval(slideId);
-        slideId = setInterval(() => {
 
-            if (index <= 0) return;
+        if (index <= 0) return;
 
-            index--;
-            addTransition();
-            addTransform();
-        }, interval);
+        index--;
+        addTransition();
+        addTransform();
     }
 
-    const startSlider = () => isReverse ? this.onPrevSlideButtonClick() : this.onNextSlideButtonClick();
+    const   startSlider = () => {
+        slideId = setInterval(() => {
+            this.onNextSlideButtonClick();
+        }, interval);
+    }
 
     const getSlides = () => document.querySelectorAll(this.slidesSelector);
 
@@ -95,6 +88,7 @@ function TestimonialSlider(options) {
     Slider.apply(this, [options]);
     this.nextBtn = options.nextBtn;
     this.prevBtn = options.prevBtn;
+
     this.slider.addEventListener('transitionend', this.onTransitionEnd);
     this.container.addEventListener('mouseover', this.onSliderHover);
     this.container.addEventListener('mouseout', this.initSlider);
@@ -106,6 +100,7 @@ function LatestPortfolioSlider(options) {
     Slider.apply(this, [options]);
     this.nextBtn = options.nextBtn;
     this.prevBtn = options.prevBtn;
+
     this.slider.addEventListener('transitionend', this.onTransitionEnd);
     this.container.addEventListener('mouseover', this.onSliderHover);
     this.container.addEventListener('mouseout', this.initSlider);
