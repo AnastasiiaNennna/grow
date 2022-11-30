@@ -122,6 +122,7 @@ select {
   text-align: left;
 }
 .header__item:last-child {
+  width: 100px;
   padding-left: 5px;
   text-align: right;
 }

@@ -36,18 +36,22 @@ const initContent = (data) => {
     initPortfolioSection(data);
     initTestimonialsSection(data);
     initContactSection(data);
-    const testimonialSlider = new TestimonialSlider(
-        TESTIMONIALS_WRAPPER_CLASS,
-        TESTIMONIALS_SLIDER_CLASS,
-        TESTIMONIALS_SLIDE_CLASS,
-        TESTIMONIALS_SLIDE_WIDTH,
-    );
-    const latestPortfolioSlider = new LatestPortfolioSlider(
-        PORTFOLIO_WRAPPER_CLASS,
-        PORTFOLIO_SLIDER_CLASS,
-        PORTFOLIO_SLIDE_CLASS,
-        PORTFOLIO_SLIDE_WIDTH,
-    );
+    const testimonialSlider = new TestimonialSlider({
+        container: TESTIMONIALS_WRAPPER_CLASS,
+        slider: TESTIMONIALS_SLIDER_CLASS,
+        slides: TESTIMONIALS_SLIDE_CLASS,
+        width: TESTIMONIALS_SLIDE_WIDTH,
+        prevBtn: document.querySelector('.slide__button-prev-testimonials'),
+        nextBtn: document.querySelector('.slide__button-next-testimonials'),
+    });
+    const latestPortfolioSlider = new LatestPortfolioSlider({
+        container: PORTFOLIO_WRAPPER_CLASS,
+        slider: PORTFOLIO_SLIDER_CLASS,
+        slides: PORTFOLIO_SLIDE_CLASS,
+        width: PORTFOLIO_SLIDE_WIDTH,
+        prevBtn: document.querySelector('.slide__button-prev-portfolio'),
+        nextBtn: document.querySelector('.slide__button-next-portfolio'),
+    });
     testimonialSlider.initSlider();
     latestPortfolioSlider.initSlider();
 };
