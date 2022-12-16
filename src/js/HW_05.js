@@ -1,7 +1,8 @@
 // 1
+
 const complexFunction = (arg1, arg2) => {
     return arg1 + arg2;
-};
+}
 
 const cache = (func) => {
     const cache = {};
@@ -16,8 +17,8 @@ const cache = (func) => {
             console.log('new');
             return cache[cached];
         }
-    };
-};
+    }
+}
 
 const cachedFunction = cache(complexFunction);
 
@@ -47,7 +48,7 @@ const ladder = {
         this.step = 0;
         return this;
     },
-};
+}
 
 ladder.up().up().down().up().showStep();
 ladder.up().up().down().up().showStep();
@@ -55,31 +56,31 @@ ladder.up().up().down().up().showStep();
 // 3.ES6
 const applyAll = (func, ...args) => {
     return func(...args);
-};
+}
 
 const sum = (...args) => {
     const arr = [...args];
     return arr.reduce((prev, next) => prev + next, 0);
-};
+}
 
 const mul = (...args) => {
     const arr = [...args];
     return arr.reduce((prev, next) => prev * next, 1);
-};
+}
 
 const div = (...args) => {
     const arr = [...args];
     const initialValue = arr[0];
     arr.shift();
     return arr.reduce((prev, next) => prev / next, initialValue);
-};
+}
 
 const dif = (...args) => {
     const arr = [...args];
     const initialValue = arr[0];
     arr.shift();
     return arr.reduce((prev, next) => prev - next, initialValue);
-};
+}
 
 console.log(applyAll(sum, 1, 2, 3)); // 6
 console.log(applyAll(mul, 2, 3, 4)); // 24
@@ -171,28 +172,28 @@ let obj = {
     surname: 'Baraban',
     age: 42,
     score: 12,
-};
+}
 
 let obj2 = {
     name: 'Petya',
     surname: 'Padawan',
     age: 52,
     score: 28,
-};
+}
 
 const greetings = function hello(greeting) {
     return !!this.name ? `${greeting}${MY_NAME_TEXT}${this.name}` : `${greeting}${MY_NAME_TEXT}${UNKNOWN}`;
-};
+}
 
 const showSuccess = function showSuccessKoef() {
-    return (!!this.age || !!this.score) ?
-        (+this.age / +this.score) :
-        0;
-};
+    return (!!this.age || !!this.score)
+        ? (+this.age / +this.score)
+        : 0;
+}
 
 const howOldAreYou = function myAge() {
     return !!this.age ? this.age : UNAVAILABLE_AGE_TEXT;
-};
+}
 
 const setKnownDataToObject = (data) => {
     return {
@@ -200,8 +201,8 @@ const setKnownDataToObject = (data) => {
         surname: data.surname,
         age: data.age,
         score: data.score,
-    };
-};
+    }
+}
 
 obj = patchObject(obj, greetings, howOldAreYou, showSuccess);
 obj2 = patchObject(obj2, greetings, howOldAreYou);
@@ -271,25 +272,25 @@ function nine(func) {
 function plus(next) {
     return function(previous) {
         return previous + next;
-    };
+    }
 }
 
 function minus(next) {
     return function(previous) {
         return previous - next;
-    };
+    }
 }
 
 function multiply(next) {
     return function(previous) {
         return previous * next;
-    };
+    }
 }
 
 function divide(next) {
     return function(previous) {
         return previous / next;
-    };
+    }
 }
 
 console.log(seven(multiply(five()))); // 35

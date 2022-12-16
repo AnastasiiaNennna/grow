@@ -12,7 +12,7 @@ document.onreadystatechange = function() {
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = 'none';
             }
-        };
+        }
 
         const initSlide = (container) => {
             reset();
@@ -22,44 +22,44 @@ document.onreadystatechange = function() {
             container.addEventListener('mouseleave', startSlider);
             nextSlideButton.addEventListener('click', onNextSlideButtonClick);
             prevSlideButton.addEventListener('click', onPrevSlideButtonClick);
-        };
+        }
 
         const startSlider = () => {
             slideId = setInterval(() => {
                 onPrevSlideButtonClick();
             }, interval);
-        };
+        }
 
         const onNextSlideButtonClick = () => {
             if (current === 0) {
                 current = slides.length;
             }
             slidePrev();
-        };
+        }
 
         const onPrevSlideButtonClick = () => {
             if (current === slides.length - 1) {
                 current = -1;
             }
             slideNext();
-        };
+        }
 
         const slideNext = () => {
             reset();
             slides[current + 1].style.display = 'flex';
             current++;
-        };
+        }
 
         const slidePrev = () => {
             reset();
             slides[current - 1].style.display = 'flex';
             current--;
-        };
+        }
 
         const onSliderHover = () => {
             clearInterval(slideId);
-        };
+        }
 
         initSlide(sliderWrapper);
-    };
-};
+    }
+}

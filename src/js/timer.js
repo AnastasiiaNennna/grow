@@ -9,19 +9,19 @@ const startTimer = () => {
         timerStart = parseInt(Date.now());
         document.querySelector('#timer').innerHTML = `Time: ${parseInt(timeOnWebsite/1000)}`;
     }, 1000);
-};
+}
 
 const getTimeOnWebsite = () => {
     return timeOnWebsite = isNaN(timeOnWebsite) ? 0 : timeOnWebsite;
-};
+}
 
 startTimer();
 
-document.querySelector('#timer').addEventListener('mouseover', (event) => {
+document.querySelector('#timer').addEventListener('mouseover', () => {
     clearInterval(timer);
 });
 
-document.querySelector('#timer').addEventListener('mouseout', (event) => {
+document.querySelector('#timer').addEventListener('mouseout', () => {
     startTimer();
 });
 

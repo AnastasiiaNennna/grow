@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedVariable
+
 class Http {
     constructor(options) {
         this._baseUrl = options.baseUrl;

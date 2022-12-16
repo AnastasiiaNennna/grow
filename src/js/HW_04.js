@@ -8,7 +8,7 @@ const tickets = (person) => {
         return 'YES';
     }
     return 'NO';
-};
+}
 
 const isChangePossible = (arr) => {
     if (typeof arr !== 'object') {
@@ -35,7 +35,7 @@ const isChangePossible = (arr) => {
                 twentyFiveBills--;
             } else {
                 fiftyBills -= 3;
-            };
+            }
             break;
         }
 
@@ -44,7 +44,7 @@ const isChangePossible = (arr) => {
         }
     }
     return true;
-};
+}
 
 console.log(tickets([25, 25, 50])); // +
 console.log(tickets([25, 100])); // -
@@ -67,9 +67,8 @@ const getSum = (str1, str2) => {
         numTwo = '0'.repeat(numOne.length - numTwo.length) + numTwo;
     }
 
-    const result = calculateSum(numOne, numTwo);
-    return result;
-};
+    return calculateSum(numOne, numTwo);
+}
 
 const calculateSum = (numOne, numTwo) => {
     let result = '';
@@ -85,17 +84,17 @@ const calculateSum = (numOne, numTwo) => {
 
         if (mind > 0) {
             sum = +sum + +mind;
-        };
+        }
         if (sum <= 9) {
             newSum = sum;
             mind = 0;
-        };
+        }
 
         if (sum > 9) {
             sum = String(sum);
             mind = Number(sum.charAt(0));
             newSum = Number(sum.charAt(1));
-        };
+        }
         resultInMind += String(newSum);
     }
 
@@ -107,7 +106,7 @@ const calculateSum = (numOne, numTwo) => {
         result += resultInMind[i];
     }
     return result;
-};
+}
 
 console.log(getSum('111111111111111111111111111111111111111111111111111',
     '23333333333333333333333333333333333333333333333333'));

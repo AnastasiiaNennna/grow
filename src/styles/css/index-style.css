@@ -122,7 +122,7 @@ select {
   text-align: left;
 }
 .header__item:last-child {
-  width: 100px;
+  width: 155px;
   padding-left: 5px;
   text-align: right;
 }
@@ -208,7 +208,7 @@ select {
 .header__item:last-child {
   padding-left: 5px;
   text-align: right;
-  width: 100px;
+  width: 145px;
 }
 .header__item:nth-child(2) {
   margin-left: -2px;
@@ -235,7 +235,6 @@ footer {
 }
 
 .socials__wrap {
-  width: 120px;
   width: 112px;
   display: inline-flex;
   justify-content: space-between;
@@ -327,8 +326,6 @@ a {
   height: 72px;
   width: 72px;
   position: absolute;
-  top: 153px;
-  left: 245px;
   top: 44%;
   left: 46%;
 }
@@ -596,6 +593,7 @@ a {
   -webkit-line-clamp: 1;
   box-orient: vertical;
   -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
 }
 .post__text {
   margin-top: 4px;
@@ -607,6 +605,7 @@ a {
   -webkit-line-clamp: 4;
   box-orient: vertical;
   -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
 }
 .post__info {
   color: #818181;
@@ -662,7 +661,7 @@ a {
   margin: 0 37px;
 }
 .portfolio__slide:hover {
-  box-shadow: 0px 9px 20px -10px #6d6d6d;
+  box-shadow: 0 9px 20px -10px #6d6d6d;
   cursor: url(../../assets/img/hand-cursor-white-h.svg), pointer;
   z-index: 1;
 }
@@ -751,7 +750,7 @@ a {
   right: 366px;
 }
 .slide__button:hover {
-  box-shadow: 0px 1px 6px 0px #6d6d6d;
+  box-shadow: 0 1px 6px 0 #6d6d6d;
   cursor: url(../../assets/img/hand-cursor-dark.svg), pointer;
 }
 
@@ -767,7 +766,7 @@ a {
   width: 560px;
   overflow: hidden;
   border-radius: 5px;
-  box-shadow: 0px 6px 25px -7px #565c60;
+  box-shadow: 0 6px 25px -7px #565c60;
 }
 .testimonials__slider {
   grid-column: 5/11;
@@ -790,7 +789,7 @@ a {
 }
 .testimonials__text {
   color: #fff;
-  margin: 54px 72px 0px 48px;
+  margin: 54px 72px 0 48px;
   width: 192px;
   word-spacing: 1px;
   letter-spacing: 0.1px;
@@ -909,7 +908,7 @@ a {
   position: absolute;
   height: 2px;
   width: 2px;
-  top: 0px;
+  top: 0;
   left: -19px;
   z-index: 2;
 }
@@ -1114,3 +1113,5 @@ body {
   font-family: "Hind Siliguri";
   color: #4d4c49;
 }
+
+/*# sourceMappingURL=index-style.css.map */

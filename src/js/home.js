@@ -54,7 +54,7 @@ const initContent = (data) => {
     });
     testimonialSlider.initSlider();
     latestPortfolioSlider.initSlider();
-};
+}
 
 const initAboutSection = (data) => {
     const fragment = document.createDocumentFragment();
@@ -100,7 +100,7 @@ const initAboutSection = (data) => {
     section.append(sectionWrapper);
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 const initBlogSection = (data) => {
     const fragment = document.createDocumentFragment();
@@ -126,7 +126,7 @@ const initBlogSection = (data) => {
     section.append(postsWrapper);
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 const initPortfolioSection = (data) => {
     const fragment = document.createDocumentFragment();
@@ -154,7 +154,7 @@ const initPortfolioSection = (data) => {
     section.append(sectionButton);
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 const initTestimonialsSection = (data) => {
     const fragment = document.createDocumentFragment();
@@ -174,7 +174,7 @@ const initTestimonialsSection = (data) => {
     section.append(slidesWrapper);
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 const initContactSection = (data) => {
     const fragment = document.createDocumentFragment();
@@ -293,10 +293,11 @@ const initContactSection = (data) => {
     section.append(sectionWrapper);
     fragment.append(section);
     MAIN_WRAPPER.append(fragment);
-};
+}
 
 const createBlogPost = (parentNode, data) => {
     const posts = data.sections[1].posts;
+
     for (let i = 0; i < posts.length; i++) {
         const fragment = document.createDocumentFragment();
         const parentDiv = document.createElement('div');
@@ -327,7 +328,7 @@ const createBlogPost = (parentNode, data) => {
         parentNode.append(fragment);
     }
     return parentNode;
-};
+}
 
 const createPortfolioSlide = (parentNode, data) => {
     const fragment = document.createDocumentFragment();
@@ -360,7 +361,7 @@ const createPortfolioSlide = (parentNode, data) => {
     fragment.append(sliderWrapper, sliderControls);
     parentNode.append(fragment);
     return parentNode;
-};
+}
 
 const createTestimonialsSlide = (parentNode, data) => {
     const slidesData = data.sections[3].slides;
@@ -405,6 +406,6 @@ const createTestimonialsSlide = (parentNode, data) => {
     fragment.append(sliderWrapper, sliderControls);
     parentNode.append(fragment);
     return parentNode;
-};
+}
 
 getData().then((data) => initContent(data));

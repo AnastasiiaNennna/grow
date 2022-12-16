@@ -1,95 +1,87 @@
-class Title {
-    static SEARCH_ACTOR_ID = 'search-button-actor';
-    static SEARCH_TITLE_ID = 'search-button-title';
+class Header {
+    #filterElement;
+    #filterInput;
+    #filterButton;
+    #searchValue;
 
     constructor(options) {
-        this._options = options;
-        this._title = this.initTitle();
-        this._searchForm = this.addSearchForms();
-        this.filter = null;
-        this.actorMarker = 'actor';
-        this.titleMarker = 'title';
+        this.options = options;
+        this.changeHandler = this.changeHandler.bind(this);
+        this.clickHandler = this.clickHandler.bind(this);
+
+        this.#init();
+        this.#bindEvents();
     }
 
-    initTitle() {
+    #init() {
         const fragment = document.createDocumentFragment();
         const title = document.createElement('h2');
+        const searchForm = this.#addSearchForm();
         title.classList.add('main__title');
         title.innerHTML = 'Blog';
-        fragment.append(title);
-        this._options.container.append(fragment);
+        fragment.append(title, searchForm);
+        this.options.container.append(fragment);
     }
 
-    addSearchForms() {
-        this.addActorSearch();
-        this.addTitleSearch();
-    }
-
-    addActorSearch() {
+    #addSearchForm() {
         const fragment = document.createDocumentFragment();
-        const searchInput = document.createElement('input');
-        const searchImage = document.createElement('div');
-        searchInput.id = 'search-by-actor';
-        searchInput.classList.add('main__search-form');
-        searchInput.setAttribute('type', 'text');
-        searchInput.setAttribute('placeholder', 'Search by actor');
-        searchImage.id = 'search-button-actor';
-        searchImage.classList.add('main__search-elem');
-        fragment.append(searchInput);
-        fragment.append(searchImage);
-        this._options.container.append(fragment);
-        searchInput.addEventListener('focusout', this.setFilter.bind(this));
-        searchImage.addEventListener('click', this.onSearchButtonClick.bind(this));
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('main__search-form');
+        wrapper.innerHTML = `<label>Filter</label>
+                             <select id="filter"
+                                class="main__search-select">
+                                <option selected value="">Choose</option>
+                                <option value="actor">Actor</option>
+                                <option value="title">Movie title</option>
+                             </select>
+                             <input id="searchInput" 
+                                    type="text"
+                                    placeholder="What are you looking for?"
+                                    class="main__search-input"
+                                    disabled>
+                             <div class="main__search-icon"></div>
+                             <button id="filterButton" 
+                                class="button button-light"
+                                disabled>
+                                    Search
+                             </button>`
+        fragment.append(wrapper);
+        return fragment;
     }
 
-    addTitleSearch() {
-        const fragment = document.createDocumentFragment();
-        const searchInput = document.createElement('input');
-        const searchImage = document.createElement('div');
-        searchInput.id = 'search-by-title';
-        searchInput.classList.add('main__search-form');
-        searchInput.setAttribute('type', 'text');
-        searchInput.setAttribute('placeholder', 'Search by title');
-        searchImage.id = 'search-button-title';
-        searchImage.classList.add('main__search-elem');
-        fragment.append(searchInput);
-        fragment.append(searchImage);
-        this._options.container.append(fragment);
-        searchInput.addEventListener('focusout', this.setFilter.bind(this));
-        searchImage.addEventListener('click', this.onSearchButtonClick.bind(this));
+    #bindEvents() {
+        this.#filterElement = document.querySelector('#filter');
+        this.#filterInput =  document.querySelector('#searchInput');
+        this.#filterButton =  document.querySelector('#filterButton');
+
+        this.#isNeedToRestoreFilter();
+
+        this.#filterElement.addEventListener('change', this.changeHandler);
     }
 
-    setFilter(event) {
-        let filterInStorage = null;
-
-        if (event) {
-            return this.getInputFilter(event);
+    #isNeedToRestoreFilter() {
+        if (document.URL.includes('?actor')) {
+            this.#restoreForm('actor')
         }
 
-        filterInStorage = localStorage.getItem('filter');
-        this.filter = filterInStorage;
-        return this.filter = filterInStorage;
-    }
-
-    getInputFilter(event) {
-        if (this.validateInput(event.target.value)) {
-            localStorage.setItem('filter', event.target.value);
-            this.filter = localStorage.getItem('filter');
-            event.target.value = '';
+        if (document.URL.includes('?title')) {
+            this.#restoreForm('title')
         }
-
-        return this.filter;
     }
 
-    validateInput(value) {
-        return this.isInputValid(value);
+    #restoreForm(value) {
+        this.#filterInput.removeAttribute('disabled');
+        this.#filterButton.removeAttribute('disabled');
+        this.#filterInput.value = document.URL.split('=')[1];
+        this.#filterButton.innerText = 'Clear filter';
+        this.#filterElement.value = value;
+
+        this.#filterButton.addEventListener('click', this.clickHandler);
     }
 
-    isInputValid(string) {
-        const regExp = /^[A-Z](?=.*[a-z])[a-zA-Z\d\s!\-.:,?]{5,60}$/g;
-        const validationResult = regExp.test(string) ?
-            true :
-            false;
+    #isInputValid(string) {
+        const regExp = /^[A-Z](?=.*[a-z])[a-zA-Z\d\s!\-.:,?]{5,60}$/;
+        const validationResult = regExp.test(string);
 
         if (!validationResult) {
             alert(`
@@ -105,17 +97,51 @@ class Title {
         return validationResult;
     }
 
-    onSearchButtonClick(event) {
-        event.target.id === Title.SEARCH_ACTOR_ID ?
-            this._options.onSearch(this.setActorMark()) :
-            this._options.onSearch(this.setTitleMark());
+    changeHandler(event) {
+        event.stopPropagation();
+        this.#searchValue = event.target.value;
+
+        if (event.target.value === '') {
+            this.#cleanUpFields();
+        } else {
+            this.#filterInput.removeAttribute('disabled');
+            this.#filterButton.removeAttribute('disabled');
+            this.#filterButton.innerText = 'Search';
+
+            this.#filterButton.addEventListener('click', this.clickHandler);
+        }
     }
 
-    setActorMark() {
-        localStorage.setItem('mark', 'actor');
+    clickHandler(event) {
+        event.stopPropagation();
+
+        event.target.innerText === 'Search'
+            ? this.#onSearch(event)
+            : this.#onClear(event);
     }
 
-    setTitleMark() {
-        localStorage.setItem('mark', 'title');
+    #onSearch(event) {
+
+        if (this.#isInputValid(this.#filterInput.value)) {
+            this.options.onSearch(this.#filterInput.value, this.#searchValue);
+            event.target.innerText = 'Clear filter'
+        } else {
+            this.#filterInput.value = '';
+        }
+    }
+
+    #onClear(event) {
+        event.target.innerText = 'Search';
+        this.#cleanUpFields();
+        this.options.onClear();
+    }
+
+    #cleanUpFields() {
+        this.#filterButton.removeEventListener('click', this.clickHandler);
+
+        this.#filterInput.setAttribute('disabled', 'disabled');
+        this.#filterButton.setAttribute('disabled', 'disabled');
+        this.#filterElement.value = '';
+        this.#filterInput.value = '';
     }
 }

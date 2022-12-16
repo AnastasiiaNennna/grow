@@ -1,6 +1,6 @@
 const USERS_URL = 'https://api.github.com/users';
 
-const loginEl = document.querySelector('#user-login');
+document.querySelector('#user-login');
 const btnEl = document.querySelector('#btn');
 const findUser = document.querySelector('#findUser');
 const dataWrap = document.querySelector('#user-data-wrap');
@@ -19,26 +19,26 @@ const onBtnClick = () => {
             showUsersData(sortData);
         })
         .catch((err) => alert(err));
-};
+}
 
 const onFindUserClick = () => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `${USERS_URL}/${lastUserId}`);
     xhr.send();
     xhr.onload = () => {
-        xhr.status != 200 ?
+        xhr.status !== 200 ?
             alert(`${xhr.status}: ${xhr.statusText}`) :
             showUserData(JSON.parse(xhr.response));
-    };
+    }
     xhr.onerror = (err) => alert(err);
-};
+}
 
 btnEl.addEventListener('click', onBtnClick);
 findUser.addEventListener('click', onFindUserClick);
 
 const sortUsers = (users) => {
     return users.sort((a, b) => a.id > b.id ? 1 : -1);
-};
+}
 
 const showUsersData = (users) => {
     findUser.classList.remove('hidden');
@@ -54,7 +54,7 @@ const showUsersData = (users) => {
                             </div>`,
         );
     });
-};
+}
 
 const showUserData = (user) => {
     dataWrap.innerHTML = '';
@@ -66,4 +66,4 @@ const showUserData = (user) => {
                                 <p> Type: ${user.type} </p>
                             </div>`,
     );
-};
+}
