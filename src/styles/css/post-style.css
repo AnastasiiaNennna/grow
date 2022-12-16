@@ -427,6 +427,7 @@ select {
   background-color: #fff;
   border-radius: 50%;
   z-index: 2;
+  top: -11px;
   left: -10px;
   top: -11px;
 }
@@ -554,7 +555,8 @@ select {
 }
 .info__rating {
   display: inline-block;
-  margin: 2px 0 0 11px;
+  margin: 2px 0 0 6px;
+  margin-left: 11px;
 }
 .info__rating_star {
   height: 14px;
@@ -714,7 +716,6 @@ footer {
   grid-area: footer;
   grid-column: 2/3;
   border-top: 2px solid #ddd;
-  background-color: #f8f8f8;
 }
 
 .footer {

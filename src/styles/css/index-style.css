@@ -326,6 +326,8 @@ a {
   height: 72px;
   width: 72px;
   position: absolute;
+  top: 153px;
+  left: 245px;
   top: 44%;
   left: 46%;
 }
@@ -1004,7 +1006,6 @@ footer {
   grid-area: footer;
   grid-column: 2/3;
   border-top: 2px solid #ddd;
-  background-color: #f8f8f8;
 }
 
 .footer {

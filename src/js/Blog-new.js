@@ -29,10 +29,16 @@ class Block {
 
     createArticle(parentNode) {
         const blockClasses = Block.CONTENT_CLASSES;
+        this.data = this.isPersonSearch ? this.data[0].known_for : this.data;
 
         for (let i = 0; i < blockClasses.length; i++) {
+
+            if (this.data[i] === undefined) {
+                return;
+            }
+
             const fragment = document.createDocumentFragment();
-            const itemData = this.isPersonSearch ? this.data[i].known_for[1] : this.data[i];
+            const itemData = this.data[i];
             const parentDiv = document.createElement('div');
             const article = document.createElement('div');
             const articleHeader = document.createElement('div');

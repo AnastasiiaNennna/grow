@@ -72,7 +72,7 @@ class Header {
     #restoreForm(value) {
         this.#filterInput.removeAttribute('disabled');
         this.#filterButton.removeAttribute('disabled');
-        this.#filterInput.value = document.URL.split('=')[1];
+        this.#filterInput.value = document.URL.split('=')[1].replace(/%20/g, ' ');
         this.#filterButton.innerText = 'Clear filter';
         this.#filterElement.value = value;
 

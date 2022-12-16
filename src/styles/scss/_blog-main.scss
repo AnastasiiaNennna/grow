@@ -4,7 +4,7 @@
     grid-area: main;
     grid-column: 2 / 3;
     display: grid;
-    grid-template: 100px 124px minmax(auto, 1666px) 185px / 140px minmax(auto, 1160px) 140px;
+    grid-template: 100px 124px auto 185px / 140px minmax(auto, 1160px) 140px;
     position: relative;
 	&__title {
         @extend %main_title;
@@ -64,7 +64,7 @@
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     display: grid;
-    grid-template: repeat(4, 379px) / minmax(auto, 1160px);
+    grid-template: auto / minmax(auto, 1160px);
     grid-row-gap: 50px;
 	&__item {
         display: grid;
@@ -116,6 +116,9 @@
         &::after {
             @extend %blog_pseudo_el;
             background: url(../../assets/img/a-icon-text.svg) no-repeat 50%;
+        }
+        & .post__button {
+            margin-bottom: 35px;
         }
     }
 }
