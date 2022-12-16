@@ -12,6 +12,6 @@ const showCurrentDate = () => {
     const currentYear = time.getFullYear();
     document.querySelector('#clock').innerHTML =
         `${currentHours}:${currentMinutes}:${currentSeconds} ${amPm} ${currentWeekDay}, ${currentMonth} ${currentDay}, ${currentYear}`;
-};
+}
 
 setInterval(showCurrentDate, 1000);

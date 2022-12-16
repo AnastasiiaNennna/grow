@@ -6,7 +6,7 @@ async function getData(){
         const response =  await import('../assets/data/blogData.json', {
                             assert: {
                                 type: 'json',
-                            };
+                            },
         });
         return response.default;
     } catch (err) {

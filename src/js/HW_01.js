@@ -60,7 +60,7 @@ const initContent = () => {
     initHeader();
     initButtons();
     contentWrapperElement.addEventListener('click', handleClick);
-};
+}
 
 const initHeader = () => homeworkTitleElement.insertAdjacentHTML('afterbegin', headerTemplate);
 
@@ -74,8 +74,8 @@ const handleClick = (event) => {
     case priceTagsFirstBtnId: getPriceTagsFirstWay(products); break;
     case priceTagsSecondBtnId: getPriceTagsSecondWay(); break;
     default: break;
-    };
-};
+    }
+}
 
 const getPrices = (products) => {
     clearData();
@@ -87,12 +87,12 @@ const getPrices = (products) => {
     products.forEach((product) => addPricesToHTML(product, tableBody));
     pricesWrapper.append(tableBody);
     contentWrapperElement.append(pricesWrapper);
-};
+}
 
 const getPriceTagsFirstWay = (products) => {
     clearData();
     addButtons(products);
-};
+}
 
 const getPriceTagsSecondWay = () => {
     clearData();
@@ -104,12 +104,12 @@ const getPriceTagsSecondWay = () => {
         Product: ${name}
         Price: ${calcDiscountPrice(price, discount)} hrn`);
     });
-};
+}
 
 const clearData = () => {
     removePricesData();
     removeFirstTagData();
-};
+}
 
 const showClearButton = () => document.getElementById(clearBtnId).classList.remove(hiddenClass);
 
@@ -122,13 +122,12 @@ const addPricesToHTML = (product, pricesWrapper) => {
                             <td>${getProductDiscount(product.discount)}</td>
                         </tr>`;
     pricesWrapper.insertAdjacentHTML('beforeend', productRow);
-};
+}
 
 const getProductPrice = (product) => {
     const salePrice = getSalePrice(product);
-    const finishedPrice = getDiscountPrice(product.discount, salePrice);
-    return finishedPrice;
-};
+    return getDiscountPrice(product.discount, salePrice);
+}
 
 const getProductDiscount = (discount) => !!discount ? `${discount}${PERCENT_SIGH}` : `${ZERO_VALUE}${PERCENT_SIGH}`;
 
@@ -136,7 +135,7 @@ const getDiscountPrice = (discount, price) => !!discount ? calcDiscountPrice(pri
 
 const getSalePrice = (product) => {
     return !!product.salePrice ? product.salePrice : calcSalePrice(product.purchasePrice, product.shopMargin);
-};
+}
 
 const calcSalePrice = (price, percents) => (price + ((price * percents) / HUNDRED_VALUE)).toFixed(ROUNDING_VALUE);
 
@@ -152,25 +151,25 @@ const addButtons = (products) => {
     products.forEach((product) => addProductButtonsToHTML(product, tagsButtonsWrapper));
     contentWrapperElement.append(tagsButtonsWrapper);
     document.querySelector(`.${buttonsTagClass}`).addEventListener('click', showTag);
-};
+}
 
 const addProductButtonsToHTML = (product, wrapper) => {
     const button = `<button id="${product.id}" class="button">${product.name}</button>`;
     wrapper.insertAdjacentHTML('beforeend', button);
-};
+}
 
 const showTag = (event) => {
     getDataToRemove(tagId);
     addTagToHTML(getProductForTag(+event.target.id));
-};
+}
 
 const getProductForTag = (id) => {
     return products.find((product) => {
         if (id === product.id) {
             return product;
-        };
+        }
     });
-};
+}
 
 const addTagToHTML = (item) => {
     const productTagTemplate = `<div id="${tagId}" class="tag-wrapper">
@@ -181,25 +180,25 @@ const addTagToHTML = (item) => {
                                     </p>
                                 </div>`;
     document.getElementById(firstWayTagId).insertAdjacentHTML('beforeend', productTagTemplate);
-};
+}
 
 const removePricesData = () => {
     getDataToRemove(pricesTableId);
-};
+}
 
 const removeFirstTagData = () => {
     getDataToRemove(firstWayTagId);
-};
+}
 
 const removeSecondTagData = () => {
     getDataToRemove(pricesTableId);
-};
+}
 
 const getDataToRemove = (identifier) => {
     const dataElement = document.getElementById(identifier);
     if (!!dataElement) {
         dataElement.remove();
-    };
-};
+    }
+}
 
 initContent();

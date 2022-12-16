@@ -35,6 +35,7 @@
         &:last-child {
             padding-left: 5px;
             text-align: right;
+            width: 145px;
         }
         &:nth-child(2) {
             margin-left: -2px;
@@ -65,7 +66,6 @@ footer {
 
 .socials {
 	&__wrap {
-        width: 120px;
         width: 112px;
         display: inline-flex;
         justify-content: space-between;

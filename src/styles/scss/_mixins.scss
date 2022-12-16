@@ -53,7 +53,7 @@
     width: 57px;
     border: 1px solid $primary-color;
     top: 23px;
-    right: 0px;
+    right: 0;
 }
 
 @mixin blog-review-circle {
@@ -192,8 +192,8 @@
         background: $icon no-repeat 50%;
     }
     &:hover {
-        box-shadow: 0px 60px 16px -52px $shadow-color-second;
-        cursor: url(../img/hand-cursor-white-h.svg), pointer;
+        box-shadow: 0 60px 16px -52px $shadow-color-second;
+        cursor: url(../../assets/img/hand-cursor-white-h.svg), pointer;
     }
 }
 

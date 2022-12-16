@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedVariable
+
 function Slider(options) {
     this.container = document.querySelector(options.container);
     this.slider = document.querySelector(options.slider);
